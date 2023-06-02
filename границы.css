@@ -34,9 +34,8 @@
 .footer__links,
 .footer__link,
 .footer__copyright {
-  /*border: 1px solid red;*/
+  border: 1px solid red;
   outline: solid 1px red;
-  /*box-sizing: border-box;*/
 }
 
 *,
