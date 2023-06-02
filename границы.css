@@ -1,0 +1,46 @@
+.page,
+.header,
+.header__lang-link,
+.header__logo,
+.lead,
+.lead__title,
+.lead__subtitle,
+.lead__wrapper,
+.lead__image,
+.lead__caption,
+.intro,
+.intro__title,
+.intro__text,
+.intro__list,
+.photo-grid,
+.photo-grid__item,
+.places,
+.place,
+.place__title,
+.place__image,
+.place__website,
+.place__url-heading,
+.place__link,
+.place__paragraph,
+.place__container,
+.place__wrapper,
+.cover,
+.cover__link,
+.cover__overlay,
+.cover__background,
+.cover__title,
+.cover__subtitle,
+.footer,
+.footer__links,
+.footer__link,
+.footer__copyright {
+  /*border: 1px solid red;*/
+  outline: solid 1px red;
+  /*box-sizing: border-box;*/
+}
+
+*,
+*::before,
+*::after {
+  outline: 1px solid red;
+}

@@ -1,0 +1,18 @@
+/*Логотип Россия*/
+.header__logo {
+  margin: 0;
+  max-width: 176px;
+  height: 100%;
+}
+
+@media screen and (max-width: 720px) {
+  .header__logo {
+    max-width: 160px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header__logo {
+    max-width: 142px;
+  }
+}

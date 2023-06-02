@@ -1,0 +1,31 @@
+/*Языки ссылки*/
+.header__lang-link {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 117%;
+  text-align: right;
+  margin: 18px 18px 6px auto;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header__lang-link:last-child {
+  margin: 18px 0 6px 0;
+}
+
+.header__lang-link:hover {
+  opacity: 80%;
+}
+
+@media screen and (max-width: 540px) {
+  .header__lang-link {
+    font-size: 18px;
+    line-height: 111%;
+    margin: 14px 18px 8px auto;
+  }
+  .header__lang-link:last-child {
+    margin: 14px 0 8px 0;
+    font-size: 18px;
+    line-height: 111%;
+  }
+}
