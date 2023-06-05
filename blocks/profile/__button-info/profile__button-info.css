@@ -1,0 +1,7 @@
+.profile__button-info {
+  background-color: black;
+  padding: 0;
+  border-width: 0;
+  align-self: self-end;
+  max-height: 24px;
+}
