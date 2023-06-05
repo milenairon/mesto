@@ -1,0 +1,9 @@
+/*Надпись*/
+.footer__copyright {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  margin: 0;
+  min-width: 282px; 
+}

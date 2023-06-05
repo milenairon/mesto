@@ -2,19 +2,21 @@
 .header,
 .logo,
 .header__logo,
-.profile, 
-.profile__image-avatar, 
-.profile__info, 
-.profile__name, 
-.profile__description-name, 
-.profile__button-info, 
+.profile,
+.profile__image-avatar,
+.profile__info,
+.profile__name,
+.profile__description-name,
+.profile__button-info,
 .profile__button-add,
 .elements,
 .element,
 .element__image,
 .element__title,
 .element__like,
-.element__image-like {
+.element__image-like,
+.footer,
+.footer__copyright {
   border: 1px solid red;
   outline: solid 1px red;
 }
