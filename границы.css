@@ -8,7 +8,13 @@
 .profile__name, 
 .profile__description-name, 
 .profile__button-info, 
-.profile__button-add {
+.profile__button-add,
+.elements,
+.element,
+.element__image,
+.element__title,
+.element__like,
+.element__image-like {
   border: 1px solid red;
   outline: solid 1px red;
 }
