@@ -1,13 +1,5 @@
 /*Картинка кнопки add*/
 .profile__image-add {
-    
-    
-  }
-  
-  @media screen and (max-width: 540px) {
-    .profile__image-add {
-      width: 100%;
-      max-height: 50px;
-    }
-  }
- 
+  width: 100%;
+  max-height: 50px;
+}
