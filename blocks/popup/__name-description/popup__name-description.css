@@ -1,0 +1,13 @@
+/*Описание имени*/
+.popup__name-description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 30px 36px 0;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__name-description {
+    margin: 30px 22px 0;
+  }
+}

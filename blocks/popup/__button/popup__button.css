@@ -1,0 +1,25 @@
+/*Кнопка сохранить*/
+.popup__button {
+  background: #000000;
+  border-radius: 2px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  margin: 48px 36px 37px;
+  width: calc(100% - 36px * 2);
+  min-height: 50px;
+  padding: 0;
+  border: 0;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__button {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 45px 22px 25px;
+    width: calc(100% - 22px * 2);
+    min-height: 46px;
+  }
+}
