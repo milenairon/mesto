@@ -1,0 +1,16 @@
+/*Кнопка сохранить*/
+.popup__button-close {
+  padding: 0;
+  border: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  transform: translate(40px, -40px);
+}
+
+@media screen and (max-width: 540px) {
+  .popup__button-close {
+    transform: translate(0, -36px);
+  }
+}

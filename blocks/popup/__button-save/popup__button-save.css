@@ -1,5 +1,5 @@
 /*Кнопка сохранить*/
-.popup__button {
+.popup__button-save {
   background: #000000;
   border-radius: 2px;
   color: #ffffff;
@@ -15,7 +15,7 @@
 }
 
 @media screen and (max-width: 540px) {
-  .popup__button {
+  .popup__button-save {
     font-size: 14px;
     line-height: 17px;
     margin: 45px 22px 25px;
