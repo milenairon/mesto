@@ -5,3 +5,6 @@
   align-self: self-end;
 }
 
+.profile__button-info:hover {
+  opacity: 0.6;
+}
