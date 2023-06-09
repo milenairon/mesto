@@ -9,7 +9,7 @@ let elementLike = document.querySelector(".element__like");
 let popup = document.querySelector(".popup");
 let formElement = popup.querySelector(".popup__container");
 let nameInput = formElement.querySelector(".popup__name");
-let jobInput = formElement.querySelector(".popup__name-description");
+let jobInput = formElement.querySelector(".popup__job");
 let popupCloseIcon = formElement.querySelector(".popup__button-close");
 let popupButtonSave = formElement.querySelector(".popup__button-save");
 
