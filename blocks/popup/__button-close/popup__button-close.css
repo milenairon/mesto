@@ -1,14 +1,17 @@
 /*Кнопка сохранить*/
 .popup__button-close {
+  position: relative;
+  top: -72px;
+  left: 400px;
   padding: 0;
   border: 0;
   background: none;
   cursor: pointer;
-  transform: translate(401px, -349px);
 }
 
 @media screen and (max-width: 600px) {
   .popup__button-close {
-    transform: translate(240px, -343px);
+    top: -61px;
+    left: 240px;
   }
 }
