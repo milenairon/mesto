@@ -4,6 +4,7 @@
   border-width: 0;
   align-self: self-end;
   align-self: center;
+  cursor: pointer;
 }
 
 .profile__button-info:hover {
