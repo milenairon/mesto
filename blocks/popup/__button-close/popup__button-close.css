@@ -1,8 +1,8 @@
 /*Кнопка сохранить*/
 .popup__button-close {
-  position: relative;
-  top: -72px;
-  left: 400px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
   padding: 0;
   border: 0;
   background: none;
@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 600px) {
   .popup__button-close {
-    top: -61px;
-    left: 240px;
+    top: -36px;
+    right: 0px;
   }
 }
