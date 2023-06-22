@@ -53,7 +53,7 @@
       <footer class="footer">
         <p class="footer__copyright">© 2023 Mesto Russia</p>
       </footer>
-      <div class="popup">
+      <div class="popup popup-form">
         <div class="popup__container">
           <button
             aria-label="Закрыть"
@@ -68,15 +68,42 @@
           </button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form name="form-name-job" class="popup__form">
-            <input class="popup__name" type="text" name="Name" />
-            <input class="popup__job" type="text" name="job" />
+            <input class="popup__name popup__input" type="text" name="Name" />
+            <input class="popup__job popup__input" type="text" name="job" />
           </form>
           <button
             aria-label="Сохранить"
-            class="popup__button-save"
+            class="popup__button-save popup__button"
             type="button"
           >
             Сохранить
+          </button>
+        </div>
+      </div>
+      <div class="popup popup-add">
+        <div class="popup__container">
+          <button
+            aria-label="Закрыть"
+            type="button"
+            class="popup__button-close"
+          >
+            <img
+              class="popup__close-icon"
+              src="./images/close-icon.svg"
+              alt="Крестик закрытия"
+            />
+          </button>
+          <h2 class="popup__title">Новое место</h2>
+          <form name="form-nameCard-linkCard" class="popup__form">
+            <input class="popup__name-card popup__input" type="text" name="nameCard" placeholder="Название" />
+            <input class="popup__link-card popup__input" type="text" name="linkCard" placeholder="Ссылка на картинку" />
+          </form>
+          <button
+            aria-label="Создать"
+            class="popup__button popup__button-create"
+            type="button"
+          >
+            Создать
           </button>
         </div>
       </div>
