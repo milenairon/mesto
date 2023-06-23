@@ -1,29 +1,29 @@
 //Массив из имен и ссылок городов
 const initialCards = [
   {
-    name: 'Красноярск',
-    link: './images/element-Krasnoyarsk.jpg'
+    name: "Красноярск",
+    link: "./images/element-Krasnoyarsk.jpg",
   },
   {
-    name: 'Новосибирск',
-    link: './images/element-Novosibirsk.png'
+    name: "Новосибирск",
+    link: "./images/element-Novosibirsk.png",
   },
   {
-    name: 'Москва',
-    link: './images/element-Moskva.png'
+    name: "Москва",
+    link: "./images/element-Moskva.png",
   },
   {
-    name: 'Санкт-Петербург',
-    link: './images/element-Sankt-Peterburg.png'
+    name: "Санкт-Петербург",
+    link: "./images/element-Sankt-Peterburg.png",
   },
   {
-    name: 'Тюмень',
-    link: './images/element-Tyumen.png'
+    name: "Тюмень",
+    link: "./images/element-Tyumen.png",
   },
   {
-    name: 'Казань',
-    link: './images/element-Kazan.png'
-  }
+    name: "Казань",
+    link: "./images/element-Kazan.png",
+  },
 ];
 //Находим элементы секции profile
 const profile = document.querySelector(".profile");
@@ -32,31 +32,32 @@ const profileButtonAdd = profile.querySelector(".profile__button-add");
 const profileTitle = profile.querySelector(".profile__title");
 const profileSubTitle = profile.querySelector(".profile__subtitle");
 //Находим элементы секции element
-const elementElement = document.querySelector('.element');
-const templateElement = document.querySelector('#element-template').content.querySelector('.element__item');
-
+const elementElement = document.querySelector(".element");
+const templateElement = document
+  .querySelector("#element-template")
+  .content.querySelector(".element__item");
 
 //Находим элементы секции popup
-let popup = document.querySelector(".popup");
-const popupForm = document.querySelector(".popup-form");
-const popupAdd = document.querySelector(".popup-add");
+let pages = document.querySelector(".pages");
+let popup = pages.querySelector(".popup");
+const popupForm = pages.querySelector(".popup-form");
+const popupAdd = pages.querySelector(".popup-add");
 let formElement = popup.querySelector(".popup__container");
 let nameInput = formElement.querySelector(".popup__name");
 let jobInput = formElement.querySelector(".popup__job");
-const popupCloseIcon = document.querySelector(".popup__button-close");
+const popupButtonSave = formElement.querySelector(".popup__button-save");
+const popupButtonCreate = formElement.querySelector(".popup__button-create");
 
-let popupButtonSave = formElement.querySelector(".popup__button-save");
-//POP UP
-//ОТКРЫТИЕ и ЗАКРЫТИЕ
+
 function popupOpen(modal) {
   modal.classList.add("popup_opened");
 }
-function popupClose(modal) {
-  modal.classList.remove("popup_opened");
+
+function popupClose(evt) {
+  evt.classList.remove("popup_opened");
 }
 
-
-//ЗАПОЛНЕНИЕ ФОРМЫ
+//ЗАПОЛНЕНИЕ ФОРМЫ name/job
 //Значения на странице дублируем в форму
 function setInputText(evt) {
   nameInput.value = profileTitle.textContent.trim(); //.trim() - уберет лишние пробелы
@@ -72,116 +73,64 @@ function handleFormSubmit(evt) {
   evt.preventDefault();
 }
 
-//
+//Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
+formElement.addEventListener("submit", handleFormSubmit);
 
-
-
-
-//ВЫЗОВЫ ФУНКЦИЙ
-popupCloseIcon.addEventListener("click", function () {
-  popupClose(popup);
-});
+//POP UP
+//ОТКРЫТИЕ
 profileButtonInfo.addEventListener("click", function () {
   popupOpen(popupForm);
   setInputText();
 });
+
 profileButtonAdd.addEventListener("click", function () {
   popupOpen(popupAdd);
 });
+
+//ЗАКРЫТИЕ
+function closeOverlay(evt) {
+  if (
+    evt.currentTarget === evt.target ||
+    evt.target.classList.contains("popup__close-icon")
+  ) {
+    //если 'элемент на котором висит(сам попапа, смотри ниже вызов)' = 'элемент, на который нажали(сам попап)' или 'параметр содержит класс popup__button-close'
+    popupClose(evt.currentTarget);
+  }
+}
+
+popupForm.addEventListener("click", closeOverlay);
+popupAdd.addEventListener("click", closeOverlay);
+
 popupButtonSave.addEventListener("click", function () {
   popupClose(popup);
   setTextInput();
 });
-
-// Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
-formElement.addEventListener("submit", handleFormSubmit);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*popupButtonCreate.addEventListener("click", function () {
+  popupClose(popup); НЕ РАБОТАЕТ НЕПОНЯТНО ПОЧЕМУ
+});*/
 
 //6 КАРТОЧЕК ГОРОДОВ
 function create(evt) {
-  //Клонируем содержимое тега template 
-const cloneElementElement = templateElement.cloneNode(true);
-// Вставим текст
-const elementTextElement = cloneElementElement.querySelector('.element__title').textContent = evt.name;
-// Вставим картинку и ее alt
-const elementimageElement = cloneElementElement.querySelector('.element__image');
-elementimageElement.src = evt.link;
-elementimageElement.alt = evt.name;
+  //Клонируем содержимое тега template
+  const cloneElementElement = templateElement.cloneNode(true);
+  // Вставим текст
+  const elementTextElement = cloneElementElement.querySelector(".element__title");
+  elementTextElement.textContent = evt.name;
+  // Вставим картинку и ее alt
+  const elementimageElement =
+    cloneElementElement.querySelector(".element__image");
+  elementimageElement.src = evt.link;
+  elementimageElement.alt = evt.name;
 
-return cloneElementElement;
+  return cloneElementElement;
 }
 
 //добавить в ul(elementElement) все, что в функции create
-function render (data){
-elementElement.prepend(create(data));
+function render(data) {
+  elementElement.prepend(create(data));
 }
 
 //Вызываем функцию render для всех элементов массива initialCards перебором(forEach)
-initialCards.forEach(item => {
-  render (item);
+initialCards.forEach((item) => {
+  render(item);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
