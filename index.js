@@ -35,7 +35,9 @@ const profileTitle = profile.querySelector(".profile__title");
 const profileSubTitle = profile.querySelector(".profile__subtitle");
 //Находим элементы секции element
 const elementElement = document.querySelector(".element");
-const templateElement = document.querySelector("#element-template").content;
+const templateElement = document
+  .querySelector("#element-template")
+  .content.querySelector(".element__item");
 const elementTitle = document.querySelector(".element__title");
 const elementImage = document.querySelector(".element__image");
 //Находим элементы секции popup
@@ -69,9 +71,12 @@ function popupClose(evt) {
   evt.classList.remove("popup_opened");
 }
 
-function popupLike(evt) {
+function toggleLike(evt) {
   evt.currentTarget.classList.toggle("element__image-like_active");
 }
+/*function delCard(evt) {
+  evt.remove();
+}*/
 
 //ЗАПОЛНЕНИЕ ФОРМЫ name/job
 //Значения на странице дублируем в форму
@@ -116,25 +121,25 @@ popupButtonSave.addEventListener("click", function () {
 });
 
 //6 КАРТОЧЕК ГОРОДОВ
-
 function create({ name, link }) {
   //Клонируем содержимое тега template
-  const cloneElementElement = templateElement.cloneNode(true);
-  const elementTextElement =
-    cloneElementElement.querySelector(".element__title");
-  const elementimageElement =
-    cloneElementElement.querySelector(".element__image");
+  const itemElement = templateElement.cloneNode(true);
+  const elementTextElement = itemElement.querySelector(".element__title");
+  const elementimageElement = itemElement.querySelector(".element__image");
   // Вставим текст, картинку и alt
   elementTextElement.textContent = name;
   elementimageElement.src = link;
   elementimageElement.alt = name;
   // поставить like
-  const elementItemElement =
-    cloneElementElement.querySelector(".element__item");
-  const elementLike = elementItemElement.querySelector(".element__image-like");
-  elementLike.addEventListener("click", popupLike);
+  const elementLike = itemElement.querySelector(".element__image-like");
+  elementLike.addEventListener("click", toggleLike);
+  //удалить элемент
+  const elementDelete = itemElement.querySelector(".element__delete");
+  elementDelete.addEventListener("click", function () {
+    itemElement.remove();
+  });
   //вернем нужный элемент
-  return cloneElementElement;
+  return itemElement;
 }
 
 //добавить в ul(elementElement) все, что в функции create
