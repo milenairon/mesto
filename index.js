@@ -35,9 +35,7 @@ const profileTitle = profile.querySelector(".profile__title");
 const profileSubTitle = profile.querySelector(".profile__subtitle");
 //Находим элементы секции element
 const elementElement = document.querySelector(".element");
-const templateElement = document
-  .querySelector("#element-template")
-  .content.querySelector(".element__item");
+const templateElement = document.querySelector("#element-template").content;
 const elementTitle = document.querySelector(".element__title");
 const elementImage = document.querySelector(".element__image");
 //Находим элементы секции popup
@@ -47,19 +45,21 @@ const formElement = popup.querySelector(".popup__container");
 const containerFormElement = popup.querySelector(
   ".popup__container_place_form"
 );
-const popupFormEdit = containerFormElement.querySelector(".popup__form_type_edit");
+const popupFormEdit = containerFormElement.querySelector(
+  ".popup__form_type_edit"
+);
 const nameInput = popupFormEdit.querySelector(".popup__name");
 const jobInput = popupFormEdit.querySelector(".popup__job");
-const popupButtonSave = containerFormElement.querySelector(".popup__button-save");
+const popupButtonSave = containerFormElement.querySelector(
+  ".popup__button-save"
+);
 const popupAdd = pages.querySelector(".popup-add");
-const containerAddElement = popupAdd.querySelector(".popup__container_place_add");
+const containerAddElement = popupAdd.querySelector(
+  ".popup__container_place_add"
+);
 const popupFormAdd = containerAddElement.querySelector(".popup__form_type_add");
 const popupNameCard = popupFormAdd.querySelector(".popup__name-card");
 const popupLinkCard = popupFormAdd.querySelector(".popup__link-card");
-
-
-
-
 
 function popupOpen(modal) {
   modal.classList.add("popup_opened");
@@ -67,6 +67,10 @@ function popupOpen(modal) {
 
 function popupClose(evt) {
   evt.classList.remove("popup_opened");
+}
+
+function popupLike(evt) {
+  evt.currentTarget.classList.toggle("element__image-like_active");
 }
 
 //ЗАПОЛНЕНИЕ ФОРМЫ name/job
@@ -120,12 +124,16 @@ function create({ name, link }) {
     cloneElementElement.querySelector(".element__title");
   const elementimageElement =
     cloneElementElement.querySelector(".element__image");
-  // Вставим текст
+  // Вставим текст, картинку и alt
   elementTextElement.textContent = name;
-  // Вставим картинку и ее alt
   elementimageElement.src = link;
   elementimageElement.alt = name;
-
+  // поставить like
+  const elementItemElement =
+    cloneElementElement.querySelector(".element__item");
+  const elementLike = elementItemElement.querySelector(".element__image-like");
+  elementLike.addEventListener("click", popupLike);
+  //вернем нужный элемент
   return cloneElementElement;
 }
 

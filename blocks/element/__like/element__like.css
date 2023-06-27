@@ -6,6 +6,8 @@
   border-width: 0;
   background-color: white;
   cursor: pointer;
+  vertical-align: middle;
+  align-items: end;
 }
 .element__like:hover {
   opacity: 0.6;

@@ -3,3 +3,8 @@
   max-width: 22px;
   max-height: 19px;
 }
+
+.element__image-like {
+  vertical-align: middle;
+  align-items: end;
+}
