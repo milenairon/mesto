@@ -25,6 +25,8 @@ const initialCards = [
     link: "./images/element-Kazan.png",
   },
 ];
+//Находим элементы секции pages
+const pages = document.querySelector(".pages");
 //Находим элементы секции profile
 const profile = document.querySelector(".profile");
 const profileButtonInfo = profile.querySelector(".profile__button-info");
@@ -38,23 +40,26 @@ const templateElement = document
   .content.querySelector(".element__item");
 const elementTitle = document.querySelector(".element__title");
 const elementImage = document.querySelector(".element__image");
-
 //Находим элементы секции popup
-const pages = document.querySelector(".pages");
 const popup = pages.querySelector(".popup");
 const popupForm = pages.querySelector(".popup-form");
-const popupFormAdd = pages.querySelector(".popup__form_type_add");
-const popupAdd = pages.querySelector(".popup-add");
 const formElement = popup.querySelector(".popup__container");
 const containerFormElement = popup.querySelector(
   ".popup__container_place_form"
 );
-const containerAddElement = popup.querySelector(".popup__container_place_add");
-const nameInput = formElement.querySelector(".popup__name");
-const jobInput = formElement.querySelector(".popup__job");
-const popupNameCard = formElement.querySelector(".popup__name-card");
-const popupLinkCard = formElement.querySelector(".popup__link-card");
-const popupButtonSave = formElement.querySelector(".popup__button-save");
+const popupFormEdit = containerFormElement.querySelector(".popup__form_type_edit");
+const nameInput = popupFormEdit.querySelector(".popup__name");
+const jobInput = popupFormEdit.querySelector(".popup__job");
+const popupButtonSave = containerFormElement.querySelector(".popup__button-save");
+const popupAdd = pages.querySelector(".popup-add");
+const containerAddElement = popupAdd.querySelector(".popup__container_place_add");
+const popupFormAdd = containerAddElement.querySelector(".popup__form_type_add");
+const popupNameCard = popupFormAdd.querySelector(".popup__name-card");
+const popupLinkCard = popupFormAdd.querySelector(".popup__link-card");
+
+
+
+
 
 function popupOpen(modal) {
   modal.classList.add("popup_opened");
@@ -144,17 +149,16 @@ initialCards.forEach((item) => {
 });
 
 //убираем отправку запроса и перезагрузку страницы для попапа form
-containerFormElement.addEventListener("submit", function (evt) {
+popupFormEdit.addEventListener("submit", function (evt) {
   evt.preventDefault();
 });
 
 //СОЗДАНИЕ КАРТОЧЕК ГОРОДОВ
-containerAddElement.addEventListener("submit", function (evt) {
+popupFormAdd.addEventListener("submit", function (evt) {
   evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
   const nameCard = popupNameCard.value;
   const linkCard = popupLinkCard.value;
   render({ name: nameCard, link: linkCard }, elementElement, "prepend");
-  //closePopup(popupAdd);
-  //e.target.reset();
+  popupClose(popupAdd);
+  evt.target.reset();
 });
-
