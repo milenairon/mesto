@@ -1,10 +1,6 @@
+/*Закрашенное сердечко*/
 .element__image-like_active {
   background-image: url(../../../../images/element-image-like-active.svg);
   max-width: 22px;
   max-height: 19px;
-}
-
-.element__image-like {
-  vertical-align: middle;
-  align-items: end;
 }

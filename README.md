@@ -67,12 +67,12 @@ jS:
 
 let popup = document.querySelector(".popup");
 
-function popupOpen(modal) {
+function openPopup(modal) {
   modal.classList.add("popup_opened");
 }
 
 profileButtonInfo.addEventListener("click", function () {
-  popupOpen(popup);
+  openPopup(popup);
 ```
 
 ### Редактиование и сохранение данных

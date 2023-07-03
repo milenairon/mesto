@@ -69,11 +69,11 @@ const popupImage = pages.querySelector(".popup_place_image");
 const popupImageItem = popupImage.querySelector(".popup__image-item");
 const popupTitleImage = popupImage.querySelector(".popup__title-image");
 
-function popupOpen(modal) {
+function openPopup(modal) {
   modal.classList.add("popup_opened");
 }
 
-function popupClose(evt) {
+function closePopup(evt) {
   evt.classList.remove("popup_opened");
 }
 
@@ -102,12 +102,12 @@ function setTextInput() {
 //POP UP
 //ОТКРЫТИЕ
 profileButtonInfo.addEventListener("click", function () {
-  popupOpen(popupForm);
+  openPopup(popupForm);
   setInputText();
 });
 
 profileButtonAdd.addEventListener("click", function () {
-  popupOpen(popupAdd);
+  openPopup(popupAdd);
 });
 
 //ЗАКРЫТИЕ
@@ -117,7 +117,7 @@ function closeOverlay(evt) {
     evt.target.classList.contains("popup__close-icon") //закрытие при нажатии на крестик
   ) {
     //если 'элемент на котором висит(сам попапа, смотри ниже вызов)' = 'элемент, на который нажали(сам попап)' или 'параметр содержит класс popup__button-close'
-    popupClose(evt.currentTarget);
+    closePopup(evt.currentTarget);
   }
 }
 
@@ -126,7 +126,7 @@ popupAdd.addEventListener("click", closeOverlay);
 popupImage.addEventListener("click", closeOverlay);
 
 popupButtonSave.addEventListener("click", function () {
-  popupClose(popup);
+  closePopup(popup);
   setTextInput();
 });
 
@@ -150,7 +150,7 @@ function create({ name, link }) {
   });
   //popup Image
   elementimageElement.addEventListener("click", () => {
-    popupOpen(popupImage);
+    openPopup(popupImage);
     openImage({ name, link });
   });
   //вернуть нужный элемент
@@ -187,6 +187,6 @@ popupFormAdd.addEventListener("submit", function (evt) {
   const nameCard = popupNameCard.value;
   const linkCard = popupLinkCard.value;
   render({ name: nameCard, link: linkCard }, elementElement, "prepend");
-  popupClose(popupAdd);
+  closePopup(popupAdd);
   evt.target.reset();
 });
