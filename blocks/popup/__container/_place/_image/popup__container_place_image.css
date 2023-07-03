@@ -8,8 +8,7 @@
     background: none;
     padding: 0;
     box-sizing: border-box;
-  
-
+    cursor: auto;
   }
   
   @media screen and (max-width: 600px) {
