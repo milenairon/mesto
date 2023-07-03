@@ -42,8 +42,9 @@ const elementTitle = document.querySelector(".element__title");
 const elementImage = document.querySelector(".element__image");
 //Находим элементы секции popup
 const popup = pages.querySelector(".popup");
-const popupForm = pages.querySelector(".popup-form");
+const popupForm = pages.querySelector(".popup_place_form");
 const formElement = popup.querySelector(".popup__container");
+//popup Edit
 const containerFormElement = popup.querySelector(
   ".popup__container_place_form"
 );
@@ -55,13 +56,18 @@ const jobInput = popupFormEdit.querySelector(".popup__job");
 const popupButtonSave = containerFormElement.querySelector(
   ".popup__button-save"
 );
-const popupAdd = pages.querySelector(".popup-add");
+//popup Add
+const popupAdd = pages.querySelector(".popup_place_add");
 const containerAddElement = popupAdd.querySelector(
   ".popup__container_place_add"
 );
 const popupFormAdd = containerAddElement.querySelector(".popup__form_type_add");
 const popupNameCard = popupFormAdd.querySelector(".popup__name-card");
 const popupLinkCard = popupFormAdd.querySelector(".popup__link-card");
+//popup Image
+const popupImage = pages.querySelector(".popup_place_image");
+const popupImageItem = popupImage.querySelector(".popup__image-item");
+const popupTitleImage = popupImage.querySelector(".popup__title-image");
 
 function popupOpen(modal) {
   modal.classList.add("popup_opened");
@@ -74,9 +80,12 @@ function popupClose(evt) {
 function toggleLike(evt) {
   evt.currentTarget.classList.toggle("element__image-like_active");
 }
-/*function delCard(evt) {
-  evt.remove();
-}*/
+
+function openImage({ name, link }) {
+  popupTitleImage.textContent = name;
+  popupImageItem.src = link;
+  popupImageItem.alt = name;
+}
 
 //ЗАПОЛНЕНИЕ ФОРМЫ name/job
 //Значения на странице дублируем в форму
@@ -114,6 +123,7 @@ function closeOverlay(evt) {
 
 popupForm.addEventListener("click", closeOverlay);
 popupAdd.addEventListener("click", closeOverlay);
+popupImage.addEventListener("click", closeOverlay);
 
 popupButtonSave.addEventListener("click", function () {
   popupClose(popup);
@@ -138,7 +148,12 @@ function create({ name, link }) {
   elementDelete.addEventListener("click", function () {
     itemElement.remove();
   });
-  //вернем нужный элемент
+  //popup Image
+  elementimageElement.addEventListener("click", () => {
+    popupOpen(popupImage);
+    openImage({ name, link });
+  });
+  //вернуть нужный элемент
   return itemElement;
 }
 
