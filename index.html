@@ -46,139 +46,14 @@
           </button>
         </section>
         <section class="elements">
-          <div class="element">
-            <img
-              class="element__image"
-              src="./images/element-Krasnoyarsk.jpg"
-              alt="Красноярск"
-            />
-            <div class="element__container">
-              <h2 class="element__title">Красноярск</h2>
-              <button
-                aria-label="Поставить лайк"
-                type="button"
-                class="element__like"
-              >
-                <img
-                  class="element__image-like"
-                  src="./images/element-image-like.svg"
-                  alt="лайк"
-                />
-              </button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="./images/element-Novosibirsk.png"
-              alt="Новосибирск"
-            />
-            <div class="element__container">
-              <h2 class="element__title">Новосибирск</h2>
-              <button
-                aria-label="Поставить лайк"
-                type="button"
-                class="element__like"
-              >
-                <img
-                  class="element__image-like"
-                  src="./images/element-image-like.svg"
-                  alt="лайк"
-                />
-              </button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="./images/element-Moskva.png"
-              alt="Москва"
-            />
-            <div class="element__container">
-              <h2 class="element__title">Москва</h2>
-              <button
-                aria-label="Поставить лайк"
-                type="button"
-                class="element__like"
-              >
-                <img
-                  class="element__image-like"
-                  src="./images/element-image-like.svg"
-                  alt="лайк"
-                />
-              </button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="./images/element-Sankt-Peterburg.png"
-              alt="Санкт-Петербург"
-            />
-            <div class="element__container">
-              <h2 class="element__title">Санкт-Петербург</h2>
-              <button
-                aria-label="Поставить лайк"
-                type="button"
-                class="element__like"
-              >
-                <img
-                  class="element__image-like"
-                  src="./images/element-image-like.svg"
-                  alt="лайк"
-                />
-              </button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="./images/element-Tyumen.png"
-              alt="Тюмень"
-            />
-            <div class="element__container">
-              <h2 class="element__title">Тюмень</h2>
-              <button
-                aria-label="Поставить лайк"
-                type="button"
-                class="element__like"
-              >
-                <img
-                  class="element__image-like"
-                  src="./images/element-image-like.svg"
-                  alt="лайк"
-                />
-              </button>
-            </div>
-          </div>
-          <div class="element">
-            <img
-              class="element__image"
-              src="./images/element-Kazan.png"
-              alt="Казань"
-            />
-            <div class="element__container">
-              <h2 class="element__title">Казань</h2>
-              <button
-                aria-label="Поставить лайк"
-                type="button"
-                class="element__like"
-              >
-                <img
-                  class="element__image-like"
-                  src="./images/element-image-like.svg"
-                  alt="лайк"
-                />
-              </button>
-            </div>
-          </div>
+          <ul class="element"></ul>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2023 Mesto Russia</p>
       </footer>
-      <div class="popup">
-        <div class="popup__container">
+      <div class="popup popup_place_form">
+        <div class="popup__container popup__container_place_form">
           <button
             aria-label="Закрыть"
             type="button"
@@ -191,20 +66,108 @@
             />
           </button>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form name="form-name-job" class="popup__form">
-            <input class="popup__name" type="text" name="Name" />
-            <input class="popup__job" type="text" name="job" />
+          <form name="form-name-job" class="popup__form popup__form_type_edit">
+            <input class="popup__name popup__input" type="text" name="Name" />
+            <input class="popup__job popup__input" type="text" name="job" />
           </form>
           <button
             aria-label="Сохранить"
-            class="popup__button-save"
+            class="popup__button-save popup__button"
             type="button"
           >
             Сохранить
           </button>
         </div>
       </div>
+      <div class="popup popup_place_add">
+        <div class="popup__container popup__container_place_add">
+          <button
+            aria-label="Закрыть"
+            type="button"
+            class="popup__button-close"
+          >
+            <img
+              class="popup__close-icon"
+              src="./images/close-icon.svg"
+              alt="Крестик закрытия"
+            />
+          </button>
+          <h2 class="popup__title">Новое место</h2>
+          <form
+            name="form-nameCard-linkCard"
+            class="popup__form popup__form_type_add"
+          >
+            <input
+              class="popup__name-card popup__input"
+              type="text"
+              placeholder="Название"
+              name=""
+            />
+            <input
+              class="popup__link-card popup__input"
+              type="text"
+              placeholder="Ссылка на картинку"
+              name=""
+            />
+
+            <button
+              aria-label="Создать"
+              class="popup__button-create popup__button"
+              type="submit"
+            >
+              Создать
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_place_image">
+        <div class="popup__container popup__container_place_image">
+          <button
+            aria-label="Закрыть"
+            type="button"
+            class="popup__button-close"
+          >
+            <img
+              class="popup__close-icon"
+              src="./images/close-icon.svg"
+              alt="Крестик закрытия"
+            />
+          </button>
+          <img class="popup__image-item" src="" alt="" />
+          <h2 class="popup__title-image"></h2>
+        </div>
+      </div>
     </div>
+    <template id="element-template">
+      <li class="element__item">
+        <button
+          aria-label="Удалить карточку"
+          type="button"
+          class="element__delete"
+        >
+          <img
+            class="element__image-delete"
+            src="./images/element-button-urn.svg"
+            alt="урна для удаления"
+          />
+        </button>
+        <img class="element__image" src="" alt="" />
+        <div class="element__container">
+          <h2 class="element__title"></h2>
+          <button
+            aria-label="Поставить лайк"
+            type="button"
+            class="element__like"
+          >
+            <img
+              class="element__image-like"
+              src="./images/element-image-like.svg"
+              alt="лайк"
+            />
+          </button>
+        </div>
+      </li>
+    </template>
     <script src="./index.js"></script>
   </body>
 </html>

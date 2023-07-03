@@ -5,7 +5,10 @@
   margin-left: 30px;
   border-width: 0;
   background-color: white;
+  cursor: pointer;
+  vertical-align: middle;
+  align-items: end;
 }
-.popup__close-icon:hover {
+.element__like:hover {
   opacity: 0.6;
 }

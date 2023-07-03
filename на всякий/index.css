@@ -1,0 +1,128 @@
+<section class="elements">
+<div class="element">
+  <img
+    class="element__image"
+    src="./images/element-Krasnoyarsk.jpg"
+    alt="Красноярск"
+  />
+  <div class="element__container">
+    <h2 class="element__title">Красноярск</h2>
+    <button
+      aria-label="Поставить лайк"
+      type="button"
+      class="element__like"
+    >
+      <img
+        class="element__image-like"
+        src="./images/element-image-like.svg"
+        alt="лайк"
+      />
+    </button>
+  </div>
+</div>
+<div class="element">
+  <img
+    class="element__image"
+    src="./images/element-Novosibirsk.png"
+    alt="Новосибирск"
+  />
+  <div class="element__container">
+    <h2 class="element__title">Новосибирск</h2>
+    <button
+      aria-label="Поставить лайк"
+      type="button"
+      class="element__like"
+    >
+      <img
+        class="element__image-like"
+        src="./images/element-image-like.svg"
+        alt="лайк"
+      />
+    </button>
+  </div>
+</div>
+<div class="element">
+  <img
+    class="element__image"
+    src="./images/element-Moskva.png"
+    alt="Москва"
+  />
+  <div class="element__container">
+    <h2 class="element__title">Москва</h2>
+    <button
+      aria-label="Поставить лайк"
+      type="button"
+      class="element__like"
+    >
+      <img
+        class="element__image-like"
+        src="./images/element-image-like.svg"
+        alt="лайк"
+      />
+    </button>
+  </div>
+</div>
+<div class="element">
+  <img
+    class="element__image"
+    src="./images/element-Sankt-Peterburg.png"
+    alt="Санкт-Петербург"
+  />
+  <div class="element__container">
+    <h2 class="element__title">Санкт-Петербург</h2>
+    <button
+      aria-label="Поставить лайк"
+      type="button"
+      class="element__like"
+    >
+      <img
+        class="element__image-like"
+        src="./images/element-image-like.svg"
+        alt="лайк"
+      />
+    </button>
+  </div>
+</div>
+<div class="element">
+  <img
+    class="element__image"
+    src="./images/element-Tyumen.png"
+    alt="Тюмень"
+  />
+  <div class="element__container">
+    <h2 class="element__title">Тюмень</h2>
+    <button
+      aria-label="Поставить лайк"
+      type="button"
+      class="element__like"
+    >
+      <img
+        class="element__image-like"
+        src="./images/element-image-like.svg"
+        alt="лайк"
+      />
+    </button>
+  </div>
+</div>
+<div class="element">
+  <img
+    class="element__image"
+    src="./images/element-Kazan.png"
+    alt="Казань"
+  />
+  <div class="element__container">
+    <h2 class="element__title">Казань</h2>
+    <button
+      aria-label="Поставить лайк"
+      type="button"
+      class="element__like"
+    >
+      <img
+        class="element__image-like"
+        src="./images/element-image-like.svg"
+        alt="лайк"
+      />
+    </button>
+  </div>
+</div>
+</section>
