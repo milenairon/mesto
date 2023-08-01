@@ -1,4 +1,4 @@
-//Массив городов для 6 карточек городов
+//Массив городов
 const initialCards = [
   {
     name: "Красноярск",
@@ -26,6 +26,7 @@ const initialCards = [
   },
 ];
 //Находим элементы секции pages
+//
 const pages = document.querySelector(".pages");
 //Находим элементы секции profile
 const profile = document.querySelector(".profile");
