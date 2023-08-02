@@ -1,0 +1,12 @@
+/*текст ошибки*/
+.popup__input-error-message {
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 121%;
+  position: absolute;
+  top: calc(31px + 5px);
+  left: 0;
+  opacity: 0;
+  width: 358px;
+}
