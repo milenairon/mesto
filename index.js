@@ -191,3 +191,9 @@ popupFormAdd.addEventListener("submit", function (evt) {
   closePopup(popupAdd);
   evt.target.reset();
 });
+
+function keyHandler(evt) {
+  if (evt.key === "Enter") {
+    container.append(create(data));
+  }
+}
