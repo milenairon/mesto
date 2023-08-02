@@ -69,5 +69,5 @@
 /*Блок popup_place_image*/
 @import url(../blocks/popup/_place/_image/popup_place_image.css);
 @import url(../blocks/popup/__container/_place/_image/popup__container_place_image.css);
-@import url(../blocks/popup/image-item/popup__image-item.css);
+@import url(../blocks/popup/__image-item/popup__image-item.css);
 @import url(../blocks/popup/__title-image/popup__title-image.css);
