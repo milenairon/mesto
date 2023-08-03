@@ -142,7 +142,7 @@ function handleFormSubmit(evt) {
 profileButtonInfo.addEventListener("click", function () {
   setInputText();
 });
-popupButtonSave.addEventListener("click", function () {
+popupButton.addEventListener("click", function () {
   setTextInput();
 });
 ```

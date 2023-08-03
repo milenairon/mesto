@@ -47,7 +47,6 @@ const popupEdit = pages.querySelector(".popup_place_edit");
 const popupFormEdit = popupEdit.querySelector(".popup__form_type_edit");
 const nameInput = popupFormEdit.querySelector(".popup__name");
 const jobInput = popupFormEdit.querySelector(".popup__job");
-const popupButtonSave = popup.querySelector(".popup__save-button");
 
 //popup Add
 const popupAdd = pages.querySelector(".popup_place_add");
@@ -61,10 +60,20 @@ const popupTitleImage = popupImage.querySelector(".popup__title-image");
 
 function openPopup(modal) {
   modal.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEsc);
 }
 
 function closePopup(modal) {
   modal.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEsc);
+}
+
+//закрытие попапа esc
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
 }
 
 function toggleLike(evt) {
@@ -101,15 +110,6 @@ profileButtonAdd.addEventListener("click", function () {
 });
 
 //ЗАКРЫТИЕ
-//при нажатии на Escape
-document.addEventListener("keydown", function (evt) {
-  if (evt.key === "Escape") {
-    closePopup(popupEdit);
-    closePopup(popupAdd);
-    closePopup(popupImage);
-  }
-});
-
 //при клике на темный фон
 function closeOverlay(evt) {
   if (
@@ -124,12 +124,6 @@ function closeOverlay(evt) {
 popupEdit.addEventListener("click", closeOverlay);
 popupAdd.addEventListener("click", closeOverlay);
 popupImage.addEventListener("click", closeOverlay);
-
-//при сохранении
-popupButtonSave.addEventListener("click", function () {
-  closePopup(popup);
-  setTextInput();
-});
 
 //ДОБАВЛЕНИЕ 6 КАРТОЧЕК ГОРОДОВ
 function createCard({ name, link }) {
@@ -177,9 +171,12 @@ initialCards.forEach((item) => {
   renderCard(item, elementElement, "append");
 });
 
-//убираем отправку запроса и перезагрузку страницы для попапа form
+//при отправке данных в форме Edit
 popupFormEdit.addEventListener("submit", function (evt) {
-  evt.preventDefault();
+  evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа form
+  //при сохранении
+  closePopup(popup);
+  setTextInput();
 });
 
 //СОЗДАНИЕ КАРТОЧЕК ГОРОДОВ
@@ -187,8 +184,10 @@ popupFormAdd.addEventListener("submit", function (evt) {
   evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
   const nameCard = popupNameCard.value;
   const linkCard = popupLinkCard.value;
+  const buttonElement = popupFormAdd.querySelector(".popup__button");
   renderCard({ name: nameCard, link: linkCard }, elementElement, "prepend");
   closePopup(popupAdd);
+  buttonElement.classList.add("popup__button_disabled");
+  buttonElement.setAttribute("disabled", "true");
   evt.target.reset();
 });
-
