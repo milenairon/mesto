@@ -4,4 +4,6 @@
   aspect-ratio: 1/1;
   object-fit: cover;
   cursor: pointer;
+  min-width: 282px;
+  min-height: 282px;
 }
