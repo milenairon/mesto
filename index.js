@@ -42,26 +42,16 @@ const elementTitle = document.querySelector(".element__title");
 const elementImage = document.querySelector(".element__image");
 //Находим элементы секции popup
 const popup = pages.querySelector(".popup");
-const popupForm = pages.querySelector(".popup_place_form");
-const formElement = popup.querySelector(".popup__container");
+const popupEdit = pages.querySelector(".popup_place_edit");
 //popup Edit
-const containerFormElement = popup.querySelector(
-  ".popup__container_place_form"
-);
-const popupFormEdit = containerFormElement.querySelector(
-  ".popup__form_type_edit"
-);
+const popupFormEdit = popupEdit.querySelector(".popup__form_type_edit");
 const nameInput = popupFormEdit.querySelector(".popup__name");
 const jobInput = popupFormEdit.querySelector(".popup__job");
-const popupButtonSave = containerFormElement.querySelector(
-  ".popup__button-save"
-);
+const popupButtonSave = popup.querySelector(".popup__save-button");
+
 //popup Add
 const popupAdd = pages.querySelector(".popup_place_add");
-const containerAddElement = popupAdd.querySelector(
-  ".popup__container_place_add"
-);
-const popupFormAdd = containerAddElement.querySelector(".popup__form_type_add");
+const popupFormAdd = popupAdd.querySelector(".popup__form_type_add");
 const popupNameCard = popupFormAdd.querySelector(".popup__name-card");
 const popupLinkCard = popupFormAdd.querySelector(".popup__link-card");
 //popup Image
@@ -102,7 +92,7 @@ function setTextInput() {
 //POP UP
 //ОТКРЫТИЕ
 profileButtonInfo.addEventListener("click", function () {
-  openPopup(popupForm);
+  openPopup(popupEdit);
   setInputText();
 });
 
@@ -111,6 +101,16 @@ profileButtonAdd.addEventListener("click", function () {
 });
 
 //ЗАКРЫТИЕ
+//при нажатии на Escape
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === "Escape") {
+    closePopup(popupEdit);
+    closePopup(popupAdd);
+    closePopup(popupImage);
+  }
+});
+
+//при клике на темный фон
 function closeOverlay(evt) {
   if (
     evt.currentTarget === evt.target || //закрытие при нажатии в пустоту
@@ -121,16 +121,17 @@ function closeOverlay(evt) {
   }
 }
 
-popupForm.addEventListener("click", closeOverlay);
+popupEdit.addEventListener("click", closeOverlay);
 popupAdd.addEventListener("click", closeOverlay);
 popupImage.addEventListener("click", closeOverlay);
 
+//при сохранении
 popupButtonSave.addEventListener("click", function () {
   closePopup(popup);
   setTextInput();
 });
 
-//6 КАРТОЧЕК ГОРОДОВ
+//ДОБАВЛЕНИЕ 6 КАРТОЧЕК ГОРОДОВ
 function create({ name, link }) {
   //Клонируем содержимое тега template
   const itemElement = templateElement.cloneNode(true);
@@ -190,3 +191,9 @@ popupFormAdd.addEventListener("submit", function (evt) {
   closePopup(popupAdd);
   evt.target.reset();
 });
+
+function keyHandler(evt) {
+  if (evt.key === "Enter") {
+    container.append(create(data));
+  }
+}
