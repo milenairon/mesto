@@ -63,15 +63,15 @@ function openPopup(modal) {
   modal.classList.add("popup_opened");
 }
 
-function closePopup(evt) {
-  evt.classList.remove("popup_opened");
+function closePopup(modal) {
+  modal.classList.remove("popup_opened");
 }
 
 function toggleLike(evt) {
   evt.currentTarget.classList.toggle("element__image-like_active");
 }
 
-function openImage({ name, link }) {
+function setPopupImageData({ name, link }) {
   popupTitleImage.textContent = name;
   popupImageItem.src = link;
   popupImageItem.alt = name;
@@ -132,7 +132,7 @@ popupButtonSave.addEventListener("click", function () {
 });
 
 //ДОБАВЛЕНИЕ 6 КАРТОЧЕК ГОРОДОВ
-function create({ name, link }) {
+function createCard({ name, link }) {
   //Клонируем содержимое тега template
   const itemElement = templateElement.cloneNode(true);
   const elementTextElement = itemElement.querySelector(".element__title");
@@ -152,29 +152,29 @@ function create({ name, link }) {
   //popup Image
   elementimageElement.addEventListener("click", () => {
     openPopup(popupImage);
-    openImage({ name, link });
+    setPopupImageData({ name, link });
   });
   //вернуть нужный элемент
   return itemElement;
 }
 
-//добавить в ul(elementElement) все, что в функции create
-function render(data, container, position = "append") {
+//добавить в ul(elementElement) все, что в функции createCard
+function renderCard(data, container, position = "append") {
   switch (position) {
     case "append":
-      container.append(create(data));
+      container.append(createCard(data));
       break;
     case "prepend":
-      container.prepend(create(data));
+      container.prepend(createCard(data));
       break;
     default:
       break;
   }
 }
 
-//Вызываем функцию render для всех элементов массива initialCards перебором(forEach)
+//Вызываем функцию renderCard для всех элементов массива initialCards перебором(forEach)
 initialCards.forEach((item) => {
-  render(item, elementElement, "append");
+  renderCard(item, elementElement, "append");
 });
 
 //убираем отправку запроса и перезагрузку страницы для попапа form
@@ -187,13 +187,8 @@ popupFormAdd.addEventListener("submit", function (evt) {
   evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
   const nameCard = popupNameCard.value;
   const linkCard = popupLinkCard.value;
-  render({ name: nameCard, link: linkCard }, elementElement, "prepend");
+  renderCard({ name: nameCard, link: linkCard }, elementElement, "prepend");
   closePopup(popupAdd);
   evt.target.reset();
 });
 
-function keyHandler(evt) {
-  if (evt.key === "Enter") {
-    container.append(create(data));
-  }
-}
