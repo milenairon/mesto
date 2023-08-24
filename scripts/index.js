@@ -1,3 +1,4 @@
+import Card from "./card.js";
 //Массив городов
 const initialCards = [
   {
@@ -35,11 +36,7 @@ const profileTitle = profile.querySelector(".profile__title");
 const profileSubTitle = profile.querySelector(".profile__subtitle");
 //Находим элементы секции element
 const elementElement = document.querySelector(".element");
-const templateElement = document
-  .querySelector("#element-template")
-  .content.querySelector(".element__item");
-const elementTitle = document.querySelector(".element__title");
-const elementImage = document.querySelector(".element__image");
+
 //Находим элементы секции popup
 const popup = pages.querySelector(".popup");
 const popupEdit = pages.querySelector(".popup_place_edit");
@@ -74,16 +71,6 @@ function closeByEsc(evt) {
     const openedPopup = document.querySelector(".popup_opened");
     closePopup(openedPopup);
   }
-}
-
-function toggleLike(evt) {
-  evt.currentTarget.classList.toggle("element__image-like_active");
-}
-
-function setPopupImageData({ name, link }) {
-  popupTitleImage.textContent = name;
-  popupImageItem.src = link;
-  popupImageItem.alt = name;
 }
 
 //ЗАПОЛНЕНИЕ ФОРМЫ name/job
@@ -125,41 +112,15 @@ popupEdit.addEventListener("click", closeOverlay);
 popupAdd.addEventListener("click", closeOverlay);
 popupImage.addEventListener("click", closeOverlay);
 
-//ДОБАВЛЕНИЕ 6 КАРТОЧЕК ГОРОДОВ
-function createCard({ name, link }) {
-  //Клонируем содержимое тега template
-  const itemElement = templateElement.cloneNode(true);
-  const elementTextElement = itemElement.querySelector(".element__title");
-  const elementimageElement = itemElement.querySelector(".element__image");
-  // Вставим текст, картинку и alt
-  elementTextElement.textContent = name;
-  elementimageElement.src = link;
-  elementimageElement.alt = name;
-  // поставить like
-  const elementLike = itemElement.querySelector(".element__image-like");
-  elementLike.addEventListener("click", toggleLike);
-  //удалить элемент
-  const elementDelete = itemElement.querySelector(".element__delete");
-  elementDelete.addEventListener("click", function () {
-    itemElement.remove();
-  });
-  //popup Image
-  elementimageElement.addEventListener("click", () => {
-    openPopup(popupImage);
-    setPopupImageData({ name, link });
-  });
-  //вернуть нужный элемент
-  return itemElement;
-}
-
 //добавить в ul(elementElement) все, что в функции createCard
 function renderCard(data, container, position = "append") {
+  const card = new Card(data);
   switch (position) {
     case "append":
-      container.append(createCard(data));
+      container.append(card.getView());
       break;
     case "prepend":
-      container.prepend(createCard(data));
+      container.prepend(card.getView());
       break;
     default:
       break;
@@ -191,3 +152,5 @@ popupFormAdd.addEventListener("submit", function (evt) {
   buttonElement.setAttribute("disabled", "true");
   evt.target.reset();
 });
+
+export { popupTitleImage, popupImageItem, popupImage };
