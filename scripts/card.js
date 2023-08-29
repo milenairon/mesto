@@ -44,7 +44,6 @@ class Card {
   }
   _openPopup() {
     this._popupImage.classList.add("popup_opened");
-    console.log(this);
   }
 
   _setListener() {

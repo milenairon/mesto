@@ -1,4 +1,5 @@
-import Card from "./card.js";
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 //Массив городов
 const initialCards = [
   {
@@ -54,6 +55,14 @@ const popupLinkCard = popupFormAdd.querySelector(".popup__link-card");
 const popupImage = pages.querySelector(".popup_place_image");
 const popupImageItem = popupImage.querySelector(".popup__image-item");
 const popupTitleImage = popupImage.querySelector(".popup__title-image");
+const config = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error-message_visible",
+};
 
 function openPopup(modal) {
   modal.classList.add("popup_opened");
@@ -112,24 +121,33 @@ popupEdit.addEventListener("click", closeOverlay);
 popupAdd.addEventListener("click", closeOverlay);
 popupImage.addEventListener("click", closeOverlay);
 
-//добавить в ul(elementElement) все, что в функции createCard
-function renderCard(data, container, position = "append") {
+//создаем карточку
+function createCard(data) {
   const card = new Card(data);
-  switch (position) {
-    case "append":
-      container.append(card.getView());
-      break;
-    case "prepend":
-      container.prepend(card.getView());
-      break;
-    default:
-      break;
-  }
+  return card.getView();
 }
 
-//Вызываем функцию renderCard для всех элементов массива initialCards перебором(forEach)
+//вывести в ul(elementElement) все, что в функции createCard
+function renderCard(data, container) {
+  container.prepend(createCard(data)); 
+}
+
+//Создание 6-ти карточек городов через перебор массива
 initialCards.forEach((item) => {
-  renderCard(item, elementElement, "append");
+  renderCard(item, elementElement);
+});
+
+//СОЗДАНИЕ NEW КАРТОЧЕК ГОРОДОВ
+popupFormAdd.addEventListener("submit", function (evt) {
+  evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
+  const nameCard = popupNameCard.value;
+  const linkCard = popupLinkCard.value;
+  const buttonElement = popupFormAdd.querySelector(".popup__button");
+  renderCard({ nameCard, linkCard }, elementElement);
+  closePopup(popupAdd);
+  buttonElement.classList.add("popup__button_disabled");
+  buttonElement.setAttribute("disabled", "true");
+  evt.target.reset();
 });
 
 //при отправке данных в форме Edit
@@ -140,17 +158,10 @@ popupFormEdit.addEventListener("submit", function (evt) {
   setTextInput();
 });
 
-//СОЗДАНИЕ КАРТОЧЕК ГОРОДОВ
-popupFormAdd.addEventListener("submit", function (evt) {
-  evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
-  const nameCard = popupNameCard.value;
-  const linkCard = popupLinkCard.value;
-  const buttonElement = popupFormAdd.querySelector(".popup__button");
-  renderCard({ name: nameCard, link: linkCard }, elementElement, "prepend");
-  closePopup(popupAdd);
-  buttonElement.classList.add("popup__button_disabled");
-  buttonElement.setAttribute("disabled", "true");
-  evt.target.reset();
-});
+//Валидация форм Edit и Content
+const validationFormEdit = new FormValidator(config, popupFormEdit);
+const validationFormContent = new FormValidator(config, popupFormAdd);
+validationFormEdit.enableValidation();
+validationFormContent.enableValidation();
 
 export { popupTitleImage, popupImageItem, popupImage };
