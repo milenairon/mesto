@@ -1,17 +1,18 @@
 import { popupTitleImage, popupImageItem, popupImage } from "./index.js";
 class Card {
-  constructor({ name, link }) {
+  constructor({ name, link }, cardTemplate) {
     this._name = name;
     this._link = link;
     this._popupTitleImage = popupTitleImage;
     this._popupImageItem = popupImageItem;
     this._popupImage = popupImage;
+    this._cardTemplate = cardTemplate;
   }
   _getTemplate() {
     //МЕТОД ПРИВАТНЫЙ?
     //Клонируем содержимое тега template
     const cardTemplate = document
-      .querySelector("#element-template")
+      .querySelector(this._cardTemplate)
       .content.querySelector(".element__card")
       .cloneNode(true);
 

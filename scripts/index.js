@@ -122,19 +122,19 @@ popupAdd.addEventListener("click", closeOverlay);
 popupImage.addEventListener("click", closeOverlay);
 
 //создаем карточку
-function createCard(data) {
-  const card = new Card(data);
+function createCard(data, cardTemplate) {
+  const card = new Card(data, cardTemplate);
   return card.getView();
 }
 
 //вывести в ul(elementElement) все, что в функции createCard
-function renderCard(data, container) {
-  container.prepend(createCard(data)); 
+function renderCard(data, cardTemplate, container) {
+  container.prepend(createCard(data, cardTemplate)); 
 }
 
 //Создание 6-ти карточек городов через перебор массива
 initialCards.forEach((item) => {
-  renderCard(item, elementElement);
+  renderCard(item, "#element-template", elementElement);
 });
 
 //СОЗДАНИЕ NEW КАРТОЧЕК ГОРОДОВ
@@ -143,7 +143,7 @@ popupFormAdd.addEventListener("submit", function (evt) {
   const nameCard = popupNameCard.value;
   const linkCard = popupLinkCard.value;
   const buttonElement = popupFormAdd.querySelector(".popup__button");
-  renderCard({ nameCard, linkCard }, elementElement);
+  renderCard({ nameCard, linkCard }, "#element-template", elementElement);
   closePopup(popupAdd);
   buttonElement.classList.add("popup__button_disabled");
   buttonElement.setAttribute("disabled", "true");
