@@ -8,8 +8,8 @@ class Card {
     this._popupImage = popupImage;
     this._cardTemplate = cardTemplate;
   }
+  
   _getTemplate() {
-    //МЕТОД ПРИВАТНЫЙ?
     //Клонируем содержимое тега template
     const cardTemplate = document
       .querySelector(this._cardTemplate)
@@ -18,6 +18,7 @@ class Card {
 
     return cardTemplate;
   }
+
   _setData() {
     // Вставим текст, картинку и alt
     const elementTextCard = this._newCard.querySelector(".element__title");
@@ -26,8 +27,6 @@ class Card {
     elementimageCard.src = this._link;
     elementimageCard.alt = this._name;
   }
-
-  //ВАЖЕН ЛИ ПОРЯДОК МЕТОДОВ?
 
   _toggleLike(evt) {
     evt.currentTarget.classList.toggle("element__image-like_active");
