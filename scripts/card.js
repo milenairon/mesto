@@ -8,7 +8,7 @@ class Card {
     this._popupImage = popupImage;
     this._cardTemplate = cardTemplate;
   }
-  
+
   _getTemplate() {
     //Клонируем содержимое тега template
     const cardTemplate = document

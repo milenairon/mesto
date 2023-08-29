@@ -129,7 +129,7 @@ function createCard(data, cardTemplate) {
 
 //вывести в ul(elementElement) все, что в функции createCard
 function renderCard(data, cardTemplate, container) {
-  container.prepend(createCard(data, cardTemplate)); 
+  container.prepend(createCard(data, cardTemplate));
 }
 
 //Создание 6-ти карточек городов через перебор массива
