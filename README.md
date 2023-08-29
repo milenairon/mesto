@@ -88,7 +88,7 @@ import Card from "./Card.js";
 
 Card.js:
 
-import { popupTitleImage, popupImageItem, popupImage } from "./index.js";
+export default Card;
 
 ```
 
