@@ -8,6 +8,10 @@ class FormValidator {
     this._inputError = config.inputErrorClass;
     this._error = config.errorClass;
     this._formElement = formElement;
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._input)
+    );
+    this._button = this._formElement.querySelector(this._submitButton);
   }
 
   //показывает элемент ошибки
@@ -40,16 +44,20 @@ class FormValidator {
   }
 
   //проверяет все ли поля формы валидны. Возвращает true или false
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput(inputListElement) {
+    return inputListElement.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
+  //заблокировать кнопку
+  addButonInactive() {
+    this._button.classList.add(this._inactiveButton);
+  }
 
   //hразблокирует/заблокирует кнопку
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._inactiveButton);
+  _toggleButtonState(inputListElement, buttonElement) {
+    if (this._hasInvalidInput(inputListElement)) {
+      this.addButonInactive(); //добавляет css неактивные
       buttonElement.setAttribute("disabled", "true"); //добавим disabled
     } else {
       buttonElement.classList.remove(this._inactiveButton);
@@ -59,27 +67,18 @@ class FormValidator {
 
   //найдем все input в одной форме
   _setEventListeners() {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(this._input)
-    );
-    const buttonElement = this._formElement.querySelector(this._submitButton);
-    this._toggleButtonState(inputList, buttonElement); //проверка: надо ли разблокировать кнопку
-    inputList.forEach((inputElement) => {
+    this._toggleButtonState(this._inputList, this._button); //проверка: надо ли разблокировать кнопку
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        // Внутри колбэка вызовем isValid,
-        // передав ей форму и проверяемый элемент
         this._isValid(inputElement); //проверка: надо ли добавить ошибку
-        this._toggleButtonState(inputList, buttonElement); //проверка: надо ли разблокировать кнопку
+        this._toggleButtonState(this._inputList, this._button); //проверка: надо ли разблокировать кнопку
       });
     });
   }
 
   //найдем все form в одном документе
   enableValidation() {
-    const formList = Array.from(document.querySelectorAll(this._form));
-    formList.forEach(() => {
-      this._setEventListeners();
-    });
+    this._setEventListeners();
   }
 }
 

@@ -1,32 +1,6 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-//Массив городов
-const initialCards = [
-  {
-    name: "Красноярск",
-    link: "./images/element-Krasnoyarsk.jpg",
-  },
-  {
-    name: "Новосибирск",
-    link: "./images/element-Novosibirsk.png",
-  },
-  {
-    name: "Москва",
-    link: "./images/element-Moskva.png",
-  },
-  {
-    name: "Санкт-Петербург",
-    link: "./images/element-Sankt-Peterburg.png",
-  },
-  {
-    name: "Тюмень",
-    link: "./images/element-Tyumen.png",
-  },
-  {
-    name: "Казань",
-    link: "./images/element-Kazan.png",
-  },
-];
+import initialCards from "./cardList.js";
 //Находим элементы секции pages
 const pages = document.querySelector(".pages");
 //Находим элементы секции profile
@@ -96,14 +70,18 @@ function setTextInput() {
 
 //POP UP
 //ОТКРЫТИЕ
-profileButtonInfo.addEventListener("click", function () {
+function openPopupEdit() {
   openPopup(popupEdit);
   setInputText();
-});
+}
 
-profileButtonAdd.addEventListener("click", function () {
+profileButtonInfo.addEventListener("click", openPopupEdit);
+
+function openPopupAdd() {
   openPopup(popupAdd);
-});
+}
+
+profileButtonAdd.addEventListener("click", openPopupAdd);
 
 //ЗАКРЫТИЕ
 //при клике на темный фон
@@ -123,45 +101,54 @@ popupImage.addEventListener("click", closeOverlay);
 
 //создаем карточку
 function createCard(data, cardTemplate) {
-  const card = new Card(data, cardTemplate);
+  const card = new Card(
+    data,
+    cardTemplate,
+    popupTitleImage,
+    popupImageItem,
+    popupImage,
+    openPopup
+  );
   return card.getView();
 }
 
-//вывести в ul(elementElement) все, что в функции createCard
+//Создание 6-ти карточек городов через перебор массива
 function renderCard(data, cardTemplate, container) {
   container.prepend(createCard(data, cardTemplate));
 }
 
-//Создание 6-ти карточек городов через перебор массива
 initialCards.forEach((item) => {
   renderCard(item, "#element-template", elementElement);
 });
 
 //СОЗДАНИЕ NEW КАРТОЧЕК ГОРОДОВ
-popupFormAdd.addEventListener("submit", function (evt) {
+function renderNewCard(evt) {
   evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
-  const nameCard = popupNameCard.value;
-  const linkCard = popupLinkCard.value;
+  const name = popupNameCard.value;
+  const link = popupLinkCard.value;
   const buttonElement = popupFormAdd.querySelector(".popup__button");
-  renderCard({ nameCard, linkCard }, "#element-template", elementElement);
+  renderCard({ name, link }, "#element-template", elementElement);
   closePopup(popupAdd);
-  buttonElement.classList.add("popup__button_disabled");
+  validationFormEdit.addButonInactive();
+  validationFormContent.addButonInactive();
   buttonElement.setAttribute("disabled", "true");
   evt.target.reset();
-});
+}
 
-//при отправке данных в форме Edit
-popupFormEdit.addEventListener("submit", function (evt) {
+popupFormAdd.addEventListener("submit", renderNewCard);
+
+//закрытие попапа Edit
+function closePopupEdit(evt) {
   evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа form
   //при сохранении
   closePopup(popup);
   setTextInput();
-});
+}
+//при отправке данных в форме Edit
+popupFormEdit.addEventListener("submit", closePopupEdit);
 
 //Валидация форм Edit и Content
 const validationFormEdit = new FormValidator(config, popupFormEdit);
 const validationFormContent = new FormValidator(config, popupFormAdd);
 validationFormEdit.enableValidation();
 validationFormContent.enableValidation();
-
-export { popupTitleImage, popupImageItem, popupImage };
