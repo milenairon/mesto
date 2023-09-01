@@ -44,34 +44,39 @@ class FormValidator {
   }
 
   //проверяет все ли поля формы валидны. Возвращает true или false
-  _hasInvalidInput(inputListElement) {
-    return inputListElement.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
   //заблокировать кнопку
   addButonInactive() {
     this._button.classList.add(this._inactiveButton);
+    this._button.setAttribute("disabled", "true");
+  }
+
+  //разблокировать кнопку
+  removeButonInactive() {
+    this._button.classList.remove(this._inactiveButton);
+    this._button.removeAttribute("disabled"); //уберем disabled
   }
 
   //hразблокирует/заблокирует кнопку
-  _toggleButtonState(inputListElement, buttonElement) {
-    if (this._hasInvalidInput(inputListElement)) {
-      this.addButonInactive(); //добавляет css неактивные
-      buttonElement.setAttribute("disabled", "true"); //добавим disabled
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.addButonInactive();
     } else {
-      buttonElement.classList.remove(this._inactiveButton);
-      buttonElement.removeAttribute("disabled"); //уберем disabled
+      this.removeButonInactive()
     }
   }
 
   //найдем все input в одной форме
   _setEventListeners() {
-    this._toggleButtonState(this._inputList, this._button); //проверка: надо ли разблокировать кнопку
+    this._toggleButtonState(); //проверка: надо ли разблокировать кнопку
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._isValid(inputElement); //проверка: надо ли добавить ошибку
-        this._toggleButtonState(this._inputList, this._button); //проверка: надо ли разблокировать кнопку
+        this._toggleButtonState(); //проверка: надо ли разблокировать кнопку
       });
     });
   }

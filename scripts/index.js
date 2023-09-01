@@ -126,12 +126,9 @@ function renderNewCard(evt) {
   evt.preventDefault(); //убираем отправку запроса и перезагрузку страницы для попапа add
   const name = popupNameCard.value;
   const link = popupLinkCard.value;
-  const buttonElement = popupFormAdd.querySelector(".popup__button");
   renderCard({ name, link }, "#element-template", elementElement);
   closePopup(popupAdd);
-  validationFormEdit.addButonInactive();
   validationFormContent.addButonInactive();
-  buttonElement.setAttribute("disabled", "true");
   evt.target.reset();
 }
 
