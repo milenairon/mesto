@@ -1,19 +1,9 @@
 class Card {
-  constructor(
-    { name, link },
-    cardTemplate,
-    popupTitleImage,
-    popupImageItem,
-    popupImage,
-    openPopup
-  ) {
+  constructor({ name, link }, cardTemplate, handleCardClick) {
     this._name = name;
     this._link = link;
-    this._popupTitleImage = popupTitleImage;
-    this._popupImageItem = popupImageItem;
-    this._popupImage = popupImage;
     this._cardTemplate = cardTemplate;
-    this._openPopup = openPopup;
+    this.handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -41,17 +31,6 @@ class Card {
     this._newCard = null; //удаляет из памяти
   }
 
-  _setPopupImageData() {
-    this._popupTitleImage.textContent = this._name;
-    this._popupImageItem.src = this._link;
-    this._popupImageItem.alt = this._name;
-  }
-
-  _openPopupImage() {
-    this._openPopup(this._popupImage);
-    this._setPopupImageData();
-  }
-
   _setListener() {
     //ставить лайк
     const elementLike = this._newCard.querySelector(".element__image-like");
@@ -59,9 +38,10 @@ class Card {
     //удалить карточку
     const elementDelete = this._newCard.querySelector(".element__delete");
     elementDelete.addEventListener("click", this._deleteCard.bind(this));
-    //открыть модальное окно с картинкой
     const elementimageCard = this._newCard.querySelector(".element__image");
-    elementimageCard.addEventListener("click", this._openPopupImage.bind(this));
+    elementimageCard.addEventListener("click", () => {
+      this.handleCardClick({name: this._name, link: this._link});
+    });
   }
 
   getView() {

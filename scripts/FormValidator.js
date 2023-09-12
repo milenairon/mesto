@@ -66,7 +66,7 @@ class FormValidator {
     if (this._hasInvalidInput()) {
       this.addButonInactive();
     } else {
-      this.removeButonInactive()
+      this.removeButonInactive();
     }
   }
 
