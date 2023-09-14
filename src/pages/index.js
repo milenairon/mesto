@@ -1,11 +1,12 @@
-import Card from "../scripts/card.js";
-import Section from "../scripts/Section.js";
-import FormValidator from "../scripts/FormValidator.js";
+import "./index.css";
+import Card from "../components/card.js";
+import Section from "../components/Section.js";
+import FormValidator from "../components/FormValidator.js";
 import initialCards from "../utils/cardList.js";
-import Popup from "../scripts/Popup.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import UserInfo from "../scripts/UserInfo.js";
+import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import {
   profileButtonInfo,
   profileButtonAdd,

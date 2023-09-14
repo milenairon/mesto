@@ -4,18 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="pages">
     <div class="page">
       <header class="header">
-        <img class="logo" src="./images/logo.svg" alt="Место. Россия" />
+        <img
+          class="logo"
+          src="<%=require('./images/logo.svg')%>"
+          alt="Место. Россия"
+        />
       </header>
       <main class="content">
         <section class="profile">
           <img
             class="profile__image-avatar"
-            src="./images/profile-avatar.png"
+            src="<%=require('./images/profile-avatar.png')%>"
             alt="человек на фоне моря"
           />
           <div class="profile__info">
@@ -27,7 +30,7 @@
             >
               <img
                 class="profile__image-info"
-                src="./images/profile-button-info.svg"
+                src="<%=require('./images/profile-button-info.svg')%>"
                 alt="редактирование формы"
               />
             </button>
@@ -40,7 +43,7 @@
           >
             <img
               class="profile__image-add"
-              src="./images/profile-button-add.svg"
+              src="<%=require('./images/profile-button-add.svg')%>"
               alt="добавление картинок"
             />
           </button>
@@ -61,7 +64,7 @@
           >
             <img
               class="popup__close-icon"
-              src="./images/close-icon.svg"
+              src="<%=require('./images/close-icon.svg')%>"
               alt="Крестик закрытия"
             />
           </button>
@@ -110,7 +113,7 @@
           >
             <img
               class="popup__close-icon"
-              src="./images/close-icon.svg"
+              src="<%=require('./images/close-icon.svg')%>"
               alt="Крестик закрытия"
             />
           </button>
@@ -157,11 +160,15 @@
           >
             <img
               class="popup__close-icon"
-              src="./images/close-icon.svg"
+              src="<%=require('./images/close-icon.svg')%>"
               alt="Крестик закрытия"
             />
           </button>
-          <img class="popup__image-item" src="./" alt="название картинки" />
+          <img
+            class="popup__image-item"
+            src="./"
+            alt="название картинки"
+          />
           <h2 class="popup__title-image"></h2>
         </div>
       </div>
@@ -175,11 +182,15 @@
         >
           <img
             class="element__image-delete"
-            src="./images/element-button-urn.svg"
+            src="<%=require('./images/element-button-urn.svg')%>"
             alt="урна для удаления"
           />
         </button>
-        <img class="element__image" src="./" alt="название картинки" />
+        <img
+          class="element__image"
+          src="./"
+          alt="название картинки"
+        />
         <div class="element__container">
           <h2 class="element__title"></h2>
           <button
@@ -189,13 +200,12 @@
           >
             <img
               class="element__image-like"
-              src="./images/element-image-like.svg"
+              src="<%=require('./images/element-image-like.svg')%>"
               alt="лайк"
             />
           </button>
         </div>
       </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
