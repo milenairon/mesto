@@ -14,7 +14,7 @@ module.exports = {
   output: {
     //место складывания файлов
     path: path.resolve(__dirname, "dist"),
-    filename: "main.js",
+    filename: "[name].[hash].js",
     publicPath: "",
   },
   mode: "development", // добавили режим разработчика
@@ -28,20 +28,23 @@ module.exports = {
   //отдай этот файл модулю babel-loader, а затем добавляй в сборку :
   module: {
     // rules — это массив правил
-      // добавим в него объект правил для бабеля
+    // добавим в него объект правил для бабеля
     rules: [
-      {//js файлы
+      {
+        //js файлы
         test: /\.js$/,
         // при обработке этих файлов нужно использовать babel-loader
         use: "babel-loader",
         // исключает папку node_modules, файлы в ней обрабатывать не нужно
         exclude: "/node_modules/",
       },
-      {//картинки, шрифты
+      {
+        //картинки, шрифты
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: "asset/resource",
       },
-      {//CSS-файлы
+      {
+        //CSS-файлы
         test: /\.css$/,
         // при обработке этих файлов нужно использовать
         // MiniCssExtractPlugin.loader и css-loader
