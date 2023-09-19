@@ -49,6 +49,7 @@ class Card {
   getView() {
     //обозначение основной переменной и вызов методов
     this._newCard = this._getTemplate();
+    this._returnElementImageCard();
     this._setData();
     this._setListener();
     return this._newCard;

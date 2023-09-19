@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup {
     this._inputs = Array.from(this._form.querySelectorAll(".popup__input"));
     this._callbackSubmitForm = callbackSubmitForm;
   }
+
   //метод для получения полей
   getInputValues() {
     //создаем пустой объекст
@@ -23,6 +24,7 @@ export default class PopupWithForm extends Popup {
   giveInputValues() {
     const values = Object.values(this.getInputValues());
     return (values);
+    
   }
   
 
@@ -33,6 +35,9 @@ export default class PopupWithForm extends Popup {
       evt.preventDefault();
       this._callbackSubmitForm(this.getInputValues());
     });
+  }
+  open(){
+    super.open();
   }
 
   close() {

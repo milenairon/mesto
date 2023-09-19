@@ -17,39 +17,40 @@ import {
   config,
 } from "../utils/constants.js";
 
-//PopupEditElement
+//Открытие Popup Edit
+//new Popup нужен для закрытия без reset формы
 const popupEditElement = new Popup(".popup_place_edit");
-function openEdit() {//создано для слушателя
+function openEdit() {
+  //создано для слушателя
   userInfoElement.getUserInfo(popupWithFormEdit.giveInputValues()); //вставляет данные при открытии
-  popupEditElement.open();
+  popupWithFormEdit.open();
   validationFormEdit.addButonInactive();
 }
 profileButtonInfo.addEventListener("click", openEdit);
 
-//PopupAddElement
-const popupAddElement = new Popup(".popup_place_add");
-
-function openAdd() {//создано для слушателя
-  popupAddElement.open();
+//Открытие Popup Add
+function openAdd() {
+  //создано для слушателя
+  popupWithFormAdd.open();
   validationFormContent.addButonInactive();
 }
 profileButtonAdd.addEventListener("click", openAdd);
 
-//PopupImageElement
-const popupImageElement = new Popup(".popup_place_image");
-popupImageElement.setEventListeners(); //закрытие на крестик, темный фон
+//Popup Image
+const popupWithImage = new PopupWithImage(".popup_place_image");
+
+//открыть модальное окно с картинкой
+function handleCardClick(data) {
+  popupWithImage.open(data);
+}
+//слушатель закрытия на крестик, темный фон
+popupWithImage.setEventListeners();
 
 //Валидация форм Edit и Content
 const validationFormEdit = new FormValidator(config, popupFormEdit);
 const validationFormContent = new FormValidator(config, popupFormAdd);
 validationFormEdit.enableValidation();
 validationFormContent.enableValidation();
-
-//открыть модальное окно с картинкой
-function handleCardClick(data) {
-  const popupWithImage = new PopupWithImage(".popup_place_image");
-  popupWithImage.open(data);
-}
 
 //Создание карточек из массива
 const cardSection = new Section(
