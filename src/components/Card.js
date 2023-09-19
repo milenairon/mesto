@@ -41,14 +41,17 @@ class Card {
       this.handleCardClick({ name: this._name, link: this._link });
     });
   }
+  _returnElementImageCard() {
+    this._elementimageCard = this._newCard.querySelector(".element__image");
+    return this._elementimageCard;
+  }
 
   getView() {
     //обозначение основной переменной и вызов методов
     this._newCard = this._getTemplate();
-    this._elementimageCard = this._newCard.querySelector(".element__image");
     this._setData();
     this._setListener();
-    return this._newCard, this._elementimageCard;
+    return this._newCard;
   }
 }
 export default Card;

@@ -18,28 +18,26 @@ import {
 } from "../utils/constants.js";
 
 //PopupEditElement
-const PopupEditElement = new Popup(".popup_place_edit");
-function openEdit() {
-  //создано для слушателя
-  PopupEditElement.open();
-  UserInfoElement.getUserInfo(popupWithFormEdit.getInputValues()); //вставляет данные при открытии
+const popupEditElement = new Popup(".popup_place_edit");
+function openEdit() {//создано для слушателя
+  userInfoElement.getUserInfo(popupWithFormEdit.giveInputValues()); //вставляет данные при открытии
+  popupEditElement.open();
   validationFormEdit.addButonInactive();
 }
 profileButtonInfo.addEventListener("click", openEdit);
 
 //PopupAddElement
-const PopupAddElement = new Popup(".popup_place_add");
+const popupAddElement = new Popup(".popup_place_add");
 
-function openAdd() {
-  //создано для слушателя
-  PopupAddElement.open();
+function openAdd() {//создано для слушателя
+  popupAddElement.open();
   validationFormContent.addButonInactive();
 }
 profileButtonAdd.addEventListener("click", openAdd);
 
 //PopupImageElement
-const PopupImageElement = new Popup(".popup_place_image");
-PopupImageElement.setEventListeners(); //закрытие на крестик, темный фон
+const popupImageElement = new Popup(".popup_place_image");
+popupImageElement.setEventListeners(); //закрытие на крестик, темный фон
 
 //Валидация форм Edit и Content
 const validationFormEdit = new FormValidator(config, popupFormEdit);
@@ -90,8 +88,8 @@ const cardNewSection = new Section(
 //Действия при Submit формы Edit
 const popupWithFormEdit = new PopupWithForm(".popup_place_edit", {
   callbackSubmitForm: () => {
-    UserInfoElement.setUserInfo(popupWithFormEdit.getInputValues());
-    popupWithFormEdit.close();
+    userInfoElement.setUserInfo(popupWithFormEdit.giveInputValues());
+    popupEditElement.close();
   },
 });
 popupWithFormEdit.setEventListeners();
@@ -106,7 +104,7 @@ const popupWithFormAdd = new PopupWithForm(".popup_place_add", {
 popupWithFormAdd.setEventListeners();
 
 //Вставить данные из попапа на страницу и наоборот при открытии/закрытии попапа
-const UserInfoElement = new UserInfo({
+const userInfoElement = new UserInfo({
   profileTitleSelector: ".profile__title",
   profileSubTitleSelector: ".profile__subtitle",
 });
