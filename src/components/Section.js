@@ -2,7 +2,7 @@ export default class Section {
   constructor({ items, renderer }, containerSelector) {
     this._items = items; //что добавить(массив из 6-ти карточек)
     this._renderer = renderer; //функция
-    this._container = containerSelector; //куда добавить
+    this._container = document.querySelector(containerSelector); //куда добавить
   }
 
   //вставаить один элемент в контекнер

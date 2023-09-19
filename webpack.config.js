@@ -14,7 +14,7 @@ module.exports = {
   output: {
     //место складывания файлов
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash].js",
+    filename: "main.js",
     publicPath: "",
   },
   mode: "development", // добавили режим разработчика

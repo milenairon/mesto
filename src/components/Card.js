@@ -17,10 +17,9 @@ class Card {
   _setData() {
     // Вставим текст, картинку и alt
     const elementTextCard = this._newCard.querySelector(".element__title");
-    const elementimageCard = this._newCard.querySelector(".element__image");
     elementTextCard.textContent = this._name;
-    elementimageCard.src = this._link;
-    elementimageCard.alt = this._name;
+    this._elementimageCard.src = this._link;
+    this._elementimageCard.alt = this._name;
   }
 
   _toggleLike(evt) {
@@ -38,18 +37,18 @@ class Card {
     //удалить карточку
     const elementDelete = this._newCard.querySelector(".element__delete");
     elementDelete.addEventListener("click", this._deleteCard.bind(this));
-    const elementimageCard = this._newCard.querySelector(".element__image");
-    elementimageCard.addEventListener("click", () => {
-      this.handleCardClick({name: this._name, link: this._link});
+    this._elementimageCard.addEventListener("click", () => {
+      this.handleCardClick({ name: this._name, link: this._link });
     });
   }
 
   getView() {
     //обозначение основной переменной и вызов методов
     this._newCard = this._getTemplate();
+    this._elementimageCard = this._newCard.querySelector(".element__image");
     this._setData();
     this._setListener();
-    return this._newCard;
+    return this._newCard, this._elementimageCard;
   }
 }
 export default Card;

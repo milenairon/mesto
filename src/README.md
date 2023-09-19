@@ -108,21 +108,21 @@ jS:
 
 let popup = document.querySelector(".popup");
 
-function openPopup(modal) {
+function open(modal) {
   modal.classList.add("popup_opened");
 }
 
 profileButtonInfo.addEventListener("click", function () {
-  openPopup(popup);
+  open(popup);
 })
 ```
 
 ```
 document.addEventListener("keydown", function (evt) {
   if (evt.key === "Escape") {
-    closePopup(popupEdit);
-    closePopup(popupAdd);
-    closePopup(popupImage);
+    close(popupEdit);
+    close(popupAdd);
+    close(popupImage);
   }
 });
 ```
@@ -134,7 +134,7 @@ function closeOverlay(evt) {
     evt.target.classList.contains("popup__close-icon") //закрытие при нажатии на крестик
   ) {
     //если 'элемент на котором висит(сам попапа, смотри ниже вызов)' = 'элемент, на который нажали(сам попап)' или 'параметр содержит класс popup__button-close'
-    closePopup(evt.currentTarget);
+    close(evt.currentTarget);
   }
 }
 ```
@@ -210,7 +210,7 @@ const elementLike = itemElement.querySelector(".element__image-like");
 ```
 jS:
  elementimageElement.addEventListener("click", () => {
-    openPopup(popupImage);
+    open(popupImage);
     openImage({ name, link });
   });
 

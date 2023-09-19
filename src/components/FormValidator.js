@@ -1,17 +1,16 @@
 class FormValidator {
   constructor(config, formElement) {
     this._config = config;
-    this._form = config.formSelector;
-    this._input = config.inputSelector;
-    this._submitButton = config.submitButtonSelector;
-    this._inactiveButton = config.inactiveButtonClass;
-    this._inputError = config.inputErrorClass;
-    this._error = config.errorClass;
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
     this._formElement = formElement;
     this._inputList = Array.from(
-      this._formElement.querySelectorAll(this._input)
+      this._formElement.querySelectorAll(this._inputSelector)
     );
-    this._button = this._formElement.querySelector(this._submitButton);
+    this._button = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   //показывает элемент ошибки
@@ -19,8 +18,8 @@ class FormValidator {
     const errorElement = this._formElement.querySelector(
       `.${inputElement.name}-input-error-message`
     );
-    inputElement.classList.add(this._inputError); // красная граница у input
-    errorElement.classList.add(this._error); //текст ошибки
+    inputElement.classList.add(this._inputErrorClass); // красная граница у input
+    errorElement.classList.add(this._errorClass); //текст ошибки
     errorElement.textContent = errorMessage; //текст ошибки
   }
 
@@ -29,8 +28,8 @@ class FormValidator {
     const errorElement = this._formElement.querySelector(
       `.${inputElement.name}-input-error-message`
     );
-    inputElement.classList.remove(this._inputError); //красная граница у input
-    errorElement.classList.remove(this._error); //текст ошибки
+    inputElement.classList.remove(this._inputErrorClass); //красная граница у input
+    errorElement.classList.remove(this._errorClass); //текст ошибки
     errorElement.textContent = ""; //текст ошибки
   }
 
@@ -51,13 +50,13 @@ class FormValidator {
   }
   //заблокировать кнопку
   addButonInactive() {
-    this._button.classList.add(this._inactiveButton);
+    this._button.classList.add(this._inactiveButtonClass);
     this._button.setAttribute("disabled", "true");
   }
 
   //разблокировать кнопку
   removeButonInactive() {
-    this._button.classList.remove(this._inactiveButton);
+    this._button.classList.remove(this._inactiveButtonClass);
     this._button.removeAttribute("disabled"); //уберем disabled
   }
 

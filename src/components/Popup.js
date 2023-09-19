@@ -1,21 +1,21 @@
 export default class Popup {
   constructor(popupSelector) {
-    this._popup = popupSelector;
+    this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
   }
-  openPopup() {
+  open() {
     this._popup.classList.add("popup_opened");
     document.addEventListener("keydown", this._handleEscClose);
   }
 
-  closePopup() {
+  close() {
     this._popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._handleEscClose);
   }
   //закрыть попап на esc
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      this.closePopup();
+      this.close();
     }
   }
   //закрыть попап  на крестик/темный фон
@@ -25,7 +25,7 @@ export default class Popup {
       evt.target.classList.contains("popup__close-icon") //закрытие при нажатии на крестик
     ) {
       //если 'элемент на котором висит(сам попапа, смотри ниже вызов)' = 'элемент, на который нажали(сам попап)' или 'параметр содержит класс popup__button-close'
-      this.closePopup();
+      this.close();
     }
   }
 
