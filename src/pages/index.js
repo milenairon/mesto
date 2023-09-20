@@ -18,8 +18,6 @@ import {
 } from "../utils/constants.js";
 
 //Открытие Popup Edit
-//new Popup нужен для закрытия без reset формы
-const popupEditElement = new Popup(".popup_place_edit");
 function openEdit() {
   //создано для слушателя
   userInfoElement.getUserInfo(popupWithFormEdit.giveInputValues()); //вставляет данные при открытии
@@ -86,21 +84,25 @@ const cardNewSection = new Section(
   ".element"
 );
 
+function handleSubmitFormEdit() {
+  userInfoElement.setUserInfo(popupWithFormEdit.giveInputValues());
+  popupWithFormEdit.close();
+}
+
+function handleSubmitFormAdd() {
+  cardNewSection.renderCard(popupNameCard.value, popupLinkCard.value);
+    popupWithFormAdd.close()
+}
+
 //Действия при Submit формы Edit
 const popupWithFormEdit = new PopupWithForm(".popup_place_edit", {
-  callbackSubmitForm: () => {
-    userInfoElement.setUserInfo(popupWithFormEdit.giveInputValues());
-    popupEditElement.close();
-  },
+  callbackSubmitForm: handleSubmitFormEdit,
 });
 popupWithFormEdit.setEventListeners();
 
 //Действия при Submit формы Add
 const popupWithFormAdd = new PopupWithForm(".popup_place_add", {
-  callbackSubmitForm: () => {
-    cardNewSection.renderCard(popupNameCard.value, popupLinkCard.value);
-    popupWithFormAdd.close();
-  },
+  callbackSubmitForm: handleSubmitFormAdd,
 });
 popupWithFormAdd.setEventListeners();
 

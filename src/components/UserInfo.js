@@ -12,6 +12,7 @@ export default class UserInfo {
   getUserInfo(values) {
     values[0] = this._profileTitle.textContent.trim();//.trim() - уберет лишние пробелы
     values[1] = this._profileSubTitle.textContent.trim();
+   
   }
   
   //вставляет данные из попапаEdit на страницу(закрытие попапа)
