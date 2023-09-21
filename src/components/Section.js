@@ -10,11 +10,6 @@ export default class Section {
     this._container.prepend(element);
   }
 
-  //отрисовка новой карточки
-  renderCard(name, link) {
-    this._renderer(name, link);
-  }
-
   //отрисовка всех элементов
   renderCards() {
     this._items.forEach((item) => {
