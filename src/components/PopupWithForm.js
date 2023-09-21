@@ -10,10 +10,10 @@ export default class PopupWithForm extends Popup {
   }
 
   //метод для получения полей
-  getInputValues() {
+  _getInputValues() {
     //создаем пустой объекст
     this._inputValues = {};
-    //Добавляем в пустой объект все значения name из input
+    //Добавляем в пустой объект все инпуты {name: value}
     this._inputs.forEach((input) => {
       this._inputValues[input.name] = input.value;
     });
@@ -21,10 +21,12 @@ export default class PopupWithForm extends Popup {
   }
 
   //метод обратный методу для получения полей
-  giveInputValues() {
-    const values = Object.values(this.getInputValues());
-    return values;
-  }
+  setInputValues(inputValues) {
+    this._inputs.forEach((input) => { 
+      //к примеру, значение инпута = инпут[job]
+      input.value = inputValues[input.name];
+    });
+ }
 
   open() {
     super.open();
@@ -40,7 +42,7 @@ export default class PopupWithForm extends Popup {
     //добавляет обработчик сабмита формы
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._callbackSubmitForm(this.getInputValues());
+      this._callbackSubmitForm(this._getInputValues());
     });
   }
 }

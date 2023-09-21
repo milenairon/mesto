@@ -10,10 +10,8 @@ const profileButtonAdd = profile.querySelector(".profile__button-add");
 const popupFormEdit = pages.querySelector(".popup__form_type_edit");
 
 //popup Add
-const popupAdd = pages.querySelector(".popup_place_add");//находим ради констант ниже
+const popupAdd = pages.querySelector(".popup_place_add"); //находим ради констант ниже
 const popupFormAdd = popupAdd.querySelector(".popup__form_type_add");
-const popupNameCard = popupFormAdd.querySelector(".popup__name-card");
-const popupLinkCard = popupFormAdd.querySelector(".popup__link-card");
 //popup Image
 const config = {
   inputSelector: ".popup__input",
@@ -28,7 +26,5 @@ export {
   profileButtonAdd,
   popupFormEdit,
   popupFormAdd,
-  popupNameCard,
-  popupLinkCard,
   config,
 };

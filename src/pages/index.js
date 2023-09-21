@@ -3,7 +3,6 @@ import Card from "../components/card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
 import initialCards from "../utils/cardList.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
@@ -12,15 +11,14 @@ import {
   profileButtonAdd,
   popupFormEdit,
   popupFormAdd,
-  popupNameCard,
-  popupLinkCard,
   config,
 } from "../utils/constants.js";
 
 //Открытие Popup Edit
 function openEdit() {
   //создано для слушателя
-  userInfoElement.getUserInfo(popupWithFormEdit.giveInputValues()); //вставляет данные при открытии
+  //вставляет данные при открытии
+  popupWithFormEdit.setInputValues(userInfoElement.getUserInfo());
   popupWithFormEdit.open();
   validationFormEdit.addButonInactive();
 }
@@ -37,10 +35,6 @@ profileButtonAdd.addEventListener("click", openAdd);
 //Popup Image
 const popupWithImage = new PopupWithImage(".popup_place_image");
 
-//открыть модальное окно с картинкой
-function handleCardClick(data) {
-  popupWithImage.open(data);
-}
 //слушатель закрытия на крестик, темный фон
 popupWithImage.setEventListeners();
 
@@ -55,56 +49,45 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, "#element-template", (item) => {
-        handleCardClick(item);
-      });
-      const cardElement = card.getView();
-      cardSection.addItem(cardElement);
+      const newcard = createCard(item);
+      cardSection.addItem(newcard);
     },
   },
   ".element"
 );
 cardSection.renderCards();
 
-//Создание new карточек
-const cardNewSection = new Section(
-  {
-    renderer: (name, link) => {
-      const card = new Card(
-        { name, link },
-        "#element-template",
-        ({ name, link }) => {
-          handleCardClick({ name, link });
-        }
-      );
-      const cardElement = card.getView();
-      cardNewSection.addItem(cardElement); //добавить элемент в разметку
-    },
-  },
-  ".element"
-);
-
-function handleSubmitFormEdit() {
-  userInfoElement.setUserInfo(popupWithFormEdit.giveInputValues());
-  popupWithFormEdit.close();
+//Создание карточки
+function createCard(item) {
+  const card = new Card(item, "#element-template", () => {
+    //открыть модальное окно с картинкой
+    popupWithImage.open({ name: item.name, link: item.link });
+  });
+  const cardElement = card.getView();
+  return cardElement;
 }
-
-function handleSubmitFormAdd() {
-  cardNewSection.renderCard(popupNameCard.value, popupLinkCard.value);
-    popupWithFormAdd.close()
-}
-
-//Действия при Submit формы Edit
-const popupWithFormEdit = new PopupWithForm(".popup_place_edit", {
-  callbackSubmitForm: handleSubmitFormEdit,
-});
-popupWithFormEdit.setEventListeners();
 
 //Действия при Submit формы Add
 const popupWithFormAdd = new PopupWithForm(".popup_place_add", {
-  callbackSubmitForm: handleSubmitFormAdd,
+  callbackSubmitForm: (inputValues) => {
+    const newcard = createCard({
+      name: inputValues.name,
+      link: inputValues.link,
+    });
+    cardSection.addItem(newcard);
+    popupWithFormAdd.close();
+  },
 });
 popupWithFormAdd.setEventListeners();
+
+//Действия при Submit формы Edit
+const popupWithFormEdit = new PopupWithForm(".popup_place_edit", {
+  callbackSubmitForm: (inputValues) => {
+    userInfoElement.setUserInfo(inputValues);
+    popupWithFormEdit.close();
+  },
+});
+popupWithFormEdit.setEventListeners();
 
 //Вставить данные из попапа на страницу и наоборот при открытии/закрытии попапа
 const userInfoElement = new UserInfo({

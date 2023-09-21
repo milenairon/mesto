@@ -55,7 +55,7 @@
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_type/_error/popup__input_type_error.css);
-@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__forename/popup__forename.css);
 @import url(../blocks/popup/__input-error-message/popup__input-error-message.css);
 @import url(../blocks/popup/__input-error-message/_visible/popup__input-error-message_visible.css);
 @import url(../blocks/popup/__job/popup__job.css);
@@ -64,8 +64,8 @@
 @import url(../blocks/popup/__button/_disabled/popup__button_disabled.css);
 
 /*Блок popup_place_add*/
-@import url(../blocks/popup/__name-card/popup__name-card.css);
-@import url(../blocks/popup/__link-card/popup__link-card.css);
+@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__link/popup__link.css);
 /*Блок popup_place_image*/
 @import url(../blocks/popup/_place/_image/popup_place_image.css);
 @import url(../blocks/popup/__container/_place/_image/popup__container_place_image.css);
