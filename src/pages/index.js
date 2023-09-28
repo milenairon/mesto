@@ -94,3 +94,25 @@ const userInfoElement = new UserInfo({
   profileTitleSelector: ".profile__title",
   profileSubTitleSelector: ".profile__subtitle",
 });
+
+//запрос о пользователе
+fetch("https://nomoreparties.co/v1/cohort-76/users/me", {
+  headers: {
+    authorization: "aeacf97e-5e0d-4830-af6d-c3921dcf63db",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
+//запрос о карточках
+fetch("https://mesto.nomoreparties.co/v1/cohort-76/cards", {
+  headers: {
+    authorization: "aeacf97e-5e0d-4830-af6d-c3921dcf63db",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+  });
