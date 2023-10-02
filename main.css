@@ -20,7 +20,9 @@
 .element__image{aspect-ratio:1/1;cursor:pointer;min-height:282px;min-width:282px;-o-object-fit:cover;object-fit:cover;width:100%}
 .element__container{display:flex;justify-content:space-between;margin:25px 20px 31px}
 .element__title{font-size:24px;font-weight:900;line-height:29px;margin:0;max-width:294px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:600px){.elements{max-width:189px}}
-.element__like{align-items:end;align-self:self-end;background-color:#fff;border-width:0;cursor:pointer;margin-left:30px;padding:0;vertical-align:middle}.element__like:hover{opacity:.6}
+.element__box{align-items:end;align-self:self-end;border:1px solid red;margin-left:30px;vertical-align:middle}
+.element__like{background-color:#fff;border-width:0;cursor:pointer;padding:0}.element__like:hover{opacity:.6}
+.element__like-lot{font-size:13px;font-weight:400;line-height:15.73px;margin:auto;text-align:center}
 .element__image-like{align-items:end;vertical-align:middle}
 .element__image-like_active{background-image:url(35948469632d0421d697.svg);max-height:19px;max-width:22px}
 .footer{font-family:Inter,Arial,Helvetica,sans-serif;margin-top:67px}@media screen and (max-width:600px){.footer{margin-top:48px}}
