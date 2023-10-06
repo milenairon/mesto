@@ -9,12 +9,14 @@ export default class UserInfo {
     return {
       forename: this._profileTitle.textContent.trim(), //.trim() - уберет лишние пробелы
       job: this._profileSubTitle.textContent.trim(),
+      id: this._id,
     };
   }
 
   //вставляет данные из попапаEdit на страницу(закрытие попапа)
-  setUserInfo({ forename, job }) {
-    this._profileTitle.textContent = forename;
-    this._profileSubTitle.textContent = job;
+  setUserInfo({ name, about, _id }) {
+    this._profileTitle.textContent = name;
+    this._profileSubTitle.textContent = about;
+    this._id = _id;
   }
 }

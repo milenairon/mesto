@@ -22,11 +22,11 @@ export default class PopupWithForm extends Popup {
 
   //метод обратный методу для получения полей
   setInputValues(inputValues) {
-    this._inputs.forEach((input) => { 
+    this._inputs.forEach((input) => {
       //к примеру, значение инпута = инпут[job]
       input.value = inputValues[input.name];
     });
- }
+  }
 
   open() {
     super.open();
@@ -36,7 +36,13 @@ export default class PopupWithForm extends Popup {
     super.close(); //функция закрытие попапа на esc
     this._form.reset();
   }
-  
+
+  //Изменить значение кнопки во время загрузки
+  changeValueButtonAtBoot(config, textLoading) {
+    const popupBtn = this._popup.querySelector(config.submitButtonSelector);
+    popupBtn.textContent = textLoading;
+  }
+
   setEventListeners() {
     super.setEventListeners(); //слушатель закрытие попапа на темный фон/крестик
     //добавляет обработчик сабмита формы
