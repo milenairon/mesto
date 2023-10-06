@@ -118,7 +118,6 @@ api
 .getProfile() //Получить мои данные
 .then((user) => {
   userInfoElement.setUserInfo(user);
-  avatar.setAvatar(user.avatar);
 })
 
 ```
@@ -250,7 +249,7 @@ document.addEventListener("keydown", function (evt) {
 ```
 
 ```
-function closeOverlay(evt) {
+function handlePopupClose(evt) {
   if (
     evt.currentTarget === evt.target || //закрытие при нажатии в пустоту
     evt.target.classList.contains("popup__close-icon") //закрытие при нажатии на крестик

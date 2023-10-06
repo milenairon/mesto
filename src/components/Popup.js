@@ -14,12 +14,12 @@ export default class Popup {
   }
   //закрыть попап на esc
   _handleEscClose(evt) {
-    if (evt.key === "Escape") { 
+    if (evt.key === "Escape") {
       this.close();
     }
   }
   //закрыть попап  на крестик/темный фон
-  _closeOverlay(evt) {
+  _handlePopupClose(evt) {
     if (
       evt.currentTarget === evt.target || //закрытие при нажатии в пустоту
       evt.target.classList.contains("popup__close-icon") //закрытие при нажатии на крестик
@@ -31,6 +31,6 @@ export default class Popup {
 
   //слушатели/обработчики событий
   setEventListeners() {
-    this._popup.addEventListener("click", this._closeOverlay.bind(this));
+    this._popup.addEventListener("click", this._handlePopupClose.bind(this));
   }
 }

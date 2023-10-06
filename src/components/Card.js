@@ -41,6 +41,7 @@ class Card {
     this._urn = this._newCard.querySelector(".element__delete");
     //like-кнопка
     this._likeButton = this._newCard.querySelector(".element__image-like");
+    this._counter = this._newCard.querySelector(".element__like-lot");
   }
 
   //Удалить карточку
@@ -56,7 +57,6 @@ class Card {
   //ставит/убирает лайк
   toggleLike(likes) {
     this._likeButton.classList.toggle("element__image-like_active");
-    this._counter = this._newCard.querySelector(".element__like-lot");
     this._counter.textContent = likes.length;
   }
 
@@ -85,14 +85,7 @@ class Card {
         this._likeButton.classList.add("element__image-like_active");
       }
     });
-    this._counter = this._newCard.querySelector(".element__like-lot");
     this._counter.textContent = this._likesLength;
-  }
-
-  //this._elementImageCard
-  _returnelementImageCard() {
-    this._elementImageCard = this._newCard.querySelector(".element__image");
-    return this._elementImageCard;
   }
 
   //удалить значок урны у не созданных мною картинок

@@ -4,20 +4,13 @@ export default class Api {
     this._headers = headers;
   }
   _getRequest(url, options) {
-    return (
-      fetch(url, options)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          //если запрос ушел, но пришел ответ с ошибкой
-          return new Error("Что-то пошло не так"); //СОЗДАТЬ КЛАСС
-        })
-        //если запрос не ушел
-        .catch((error) => {
-          console.log(error);
-        })
-    );
+    return fetch(url, options).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      //если запрос ушел, но пришел ответ с ошибкой
+      return new Error("Что-то пошло не так");
+    });
   }
 
   //Получить данные профиля

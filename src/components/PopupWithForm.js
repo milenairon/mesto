@@ -1,12 +1,13 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, { callbackSubmitForm }) {
+  constructor(config, popupSelector, { callbackSubmitForm }) {
     super(popupSelector);
     this._form = this._popup.querySelector(".popup__form");
     //собирает данные со всех полей формы
     this._inputs = Array.from(this._form.querySelectorAll(".popup__input"));
     this._callbackSubmitForm = callbackSubmitForm;
+    this._popupBtn = this._popup.querySelector(config.submitButtonSelector);
   }
 
   //метод для получения полей
@@ -28,19 +29,14 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  open() {
-    super.open();
-  }
-
   close() {
     super.close(); //функция закрытие попапа на esc
     this._form.reset();
   }
 
   //Изменить значение кнопки во время загрузки
-  changeValueButtonAtBoot(config, textLoading) {
-    const popupBtn = this._popup.querySelector(config.submitButtonSelector);
-    popupBtn.textContent = textLoading;
+  changeValueButtonAtBoot(textLoading) {
+    this._popupBtn.textContent = textLoading;
   }
 
   setEventListeners() {

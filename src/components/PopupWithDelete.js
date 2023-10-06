@@ -11,14 +11,10 @@ export default class PopupWithDelete extends Popup {
     this._handleClickBtn = handleClickBtn;
   }
 
-  close() {
-    super.close(); //функция закрытие попапа на esc
-  }
-
   setEventListeners() {
     super.setEventListeners(); //слушатель закрытие попапа на темный фон/крестик
     this._popupBtn.addEventListener("click", () => {
-      Promise.resolve(this._handleClickBtn());
+      this._handleClickBtn();
     });
   }
 }

@@ -2,13 +2,11 @@ import "./index.css";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
-//import initialCards from "../utils/cardList.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithDelete from "../components/PopupWithDelete.js";
 import Api from "../components/Api.js";
-import Avatar from "../components/Avatar.js";
 import {
   profileButtonInfo,
   profileButtonAdd,
@@ -24,7 +22,6 @@ import {
 function openEdit() {
   //создано для слушателя
   //вставляет данные при открытии
-  popupWithFormEdit.changeValueButtonAtBoot(config, "Сохранить");
   popupWithFormEdit.setInputValues(userInfoElement.getUserInfo());
   popupWithFormEdit.open();
   validationFormEdit.addButonInactive();
@@ -34,7 +31,6 @@ profileButtonInfo.addEventListener("click", openEdit);
 //Открытие Popup Add
 function openAdd() {
   //создано для слушателя
-  popupWithFormAdd.changeValueButtonAtBoot(config, "Создать");
   popupWithFormAdd.open();
   validationFormContent.addButonInactive();
 }
@@ -56,7 +52,6 @@ popupWithCardDelete.setEventListeners();
 //открытие Popup update-avatar
 function openUpdateAvatar() {
   //создано для слушателя
-  popupWithFormUpdateAvatar.changeValueButtonAtBoot(config, "Сохранить");
   popupWithFormUpdateAvatar.open();
   validationFormUpdateAvatar.addButonInactive();
 }
@@ -74,24 +69,9 @@ validationFormContent.enableValidation();
 validationFormUpdateAvatar.enableValidation();
 
 //Создание карточек с сервера
-function getCardSection(data) {
-  const cardSection = new Section(
-    {
-      items: data,
-      renderer: (item) => {
-        const newcard = createCard(item);
-        cardSection.addItem(newcard);
-      },
-    },
-    ".element"
-  );
-  return cardSection;
-}
-//Рендер карточек с сервера
-function renderCardSection(data) {
-  const cardSection = getCardSection(data);
-  cardSection.renderCards();
-}
+const cardSection = new Section((item) => {
+  cardSection.addItem(createCard(item));
+}, ".element");
 
 //Создание любой карточки
 function createCard(item) {
@@ -105,16 +85,28 @@ function createCard(item) {
     (id) => {
       //открыть попап удаления карточки
       popupWithCardDelete.open(() => {
-        api.deleteCard(id).then(() => {
-          card.deleteCard();
-          popupWithCardDelete.close();
-        });
+        api
+          .deleteCard(id)
+          .then(() => {
+            card.deleteCard();
+            popupWithCardDelete.close();
+          })
+          .catch((error) => {
+            //если запрос не ушел
+            console.log(error);
+          });
       });
     },
     (isLiked, id) => {
-      api.changeLike(isLiked, id).then((res) => {
-        card.toggleLike(res.likes);
-      });
+      api
+        .changeLike(isLiked, id)
+        .then((res) => {
+          card.toggleLike(res.likes);
+        })
+        .catch((error) => {
+          //если запрос не ушел
+          console.log(error);
+        });
     },
     userInfoElement.getUserInfo().id //id меня
   );
@@ -123,23 +115,32 @@ function createCard(item) {
 }
 
 //Действия при Submit формы Edit
-const popupWithFormEdit = new PopupWithForm(".popup_place_edit", {
+const popupWithFormEdit = new PopupWithForm(config, ".popup_place_edit", {
   callbackSubmitForm: (inputValues) => {
-    popupWithFormEdit.changeValueButtonAtBoot(config, "Сохранение...");
+    popupWithFormEdit.changeValueButtonAtBoot("Сохранение...");
     //Запрос. Редактирование профиля
-    api.editProfile(inputValues.forename, inputValues.job).then((data) => {
-      popupWithFormEdit.changeValueButtonAtBoot(config, "Данные сохранены!");
-      userInfoElement.setUserInfo(data);
-      popupWithFormEdit.close();
-    });
+    api
+      .editProfile(inputValues.forename, inputValues.job)
+      .then((data) => {
+        popupWithFormEdit.changeValueButtonAtBoot("Данные сохранены!");
+        userInfoElement.setUserInfo(data);
+        popupWithFormEdit.close();
+      })
+      .catch((error) => {
+        //если запрос не ушел
+        console.log(error);
+      })
+      .finally(() => {
+        popupWithFormEdit.changeValueButtonAtBoot("Сохранить");
+      });
   },
 });
 popupWithFormEdit.setEventListeners();
 
 //Действия при Submit формы Add
-const popupWithFormAdd = new PopupWithForm(".popup_place_add", {
+const popupWithFormAdd = new PopupWithForm(config, ".popup_place_add", {
   callbackSubmitForm: (inputValues) => {
-    popupWithFormAdd.changeValueButtonAtBoot(config, "Создание...");
+    popupWithFormAdd.changeValueButtonAtBoot("Создание...");
     //Добавить новую карточку на сервер
     api
       .createnewCard({
@@ -147,7 +148,7 @@ const popupWithFormAdd = new PopupWithForm(".popup_place_add", {
         link: inputValues.link,
       })
       .then((data) => {
-        popupWithFormAdd.changeValueButtonAtBoot(config, "Карточка создалась!");
+        popupWithFormAdd.changeValueButtonAtBoot("Карточка создалась!");
         const newcard = createCard({
           name: data.name,
           link: data.link,
@@ -156,9 +157,15 @@ const popupWithFormAdd = new PopupWithForm(".popup_place_add", {
           isLiked: false,
           owner: data.owner, //id создателя карточки
         });
-        const cardSection = getCardSection(data);
         cardSection.addItem(newcard);
         popupWithFormAdd.close();
+      })
+      .catch((error) => {
+        //если запрос не ушел
+        console.log(error);
+      })
+      .finally(() => {
+        popupWithFormAdd.changeValueButtonAtBoot("Создать");
       });
   },
 });
@@ -166,13 +173,11 @@ popupWithFormAdd.setEventListeners();
 
 //Действия при Submit формы Update-Avatar
 const popupWithFormUpdateAvatar = new PopupWithForm(
+  config,
   ".popup_place_update-avatar",
   {
     callbackSubmitForm: (inputValues) => {
-      popupWithFormUpdateAvatar.changeValueButtonAtBoot(
-        config,
-        "Сохранение..."
-      );
+      popupWithFormUpdateAvatar.changeValueButtonAtBoot("Сохранение...");
       //Добавить новую карточку на сервер
       api
         .updateAvatar({
@@ -180,24 +185,28 @@ const popupWithFormUpdateAvatar = new PopupWithForm(
         })
         .then((data) => {
           popupWithFormUpdateAvatar.changeValueButtonAtBoot(
-            config,
             "Данные сохранены!"
           );
-          avatar.setAvatar(data.avatar);
+          userInfoElement.setUserInfo(data);
           popupWithFormUpdateAvatar.close();
+        })
+        .catch((error) => {
+          //если запрос не ушел
+          console.log(error);
+        })
+        .finally(() => {
+          popupWithFormUpdateAvatar.changeValueButtonAtBoot("Сохранить");
         });
     },
   }
 );
 popupWithFormUpdateAvatar.setEventListeners();
 
-//Класс Avatar
-const avatar = new Avatar();
-
 //Вставить данные из попапа на страницу и наоборот при открытии/закрытии попапа
 const userInfoElement = new UserInfo({
   profileTitleSelector: ".profile__title",
   profileSubTitleSelector: ".profile__subtitle",
+  profileImageAvatarSelector: ".profile__image-avatar",
 });
 
 //ЗАПРОСЫ
@@ -214,12 +223,23 @@ api
   .getProfile() //Получить мои данные
   .then((user) => {
     userInfoElement.setUserInfo(user);
-    avatar.setAvatar(user.avatar);
   })
   .then(() => {
     api
       .getAllCards() //Получить все карточки
-      .then((data) => {
-        renderCardSection(data.reverse());
+      .then((cards) => {
+        const { id: userId } = userInfoElement.getUserInfo();
+        cards.reverse().forEach((card) => {
+          const isLiked = card.likes.some((user) => user._id === userId);
+          const newcard = createCard({
+            name: card.name,
+            link: card.link,
+            _id: card._id,
+            likes: card.likes,
+            isLiked: isLiked,
+            owner: card.owner, //id создателя карточки
+          });
+          cardSection.addItem(newcard);
+        });
       });
-  });
+  })
