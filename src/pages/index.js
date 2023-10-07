@@ -241,5 +241,13 @@ api
           });
           cardSection.addItem(newcard);
         });
+      })
+      .catch((error) => {
+        //если запрос не ушел
+        console.log(error);
       });
   })
+  .catch((error) => {
+    //если запрос не ушел
+    console.log(error);
+  });
