@@ -1,6 +1,5 @@
 export default class Section {
-  constructor({ items, renderer }, containerSelector) {
-    this._items = items; //что добавить(массив из 6-ти карточек)
+  constructor({ renderer }, containerSelector) {
     this._renderer = renderer; //функция
     this._container = document.querySelector(containerSelector); //куда добавить
   }
@@ -11,10 +10,9 @@ export default class Section {
   }
 
   //отрисовка всех элементов
-  renderItems() {
-    this._items.forEach((item) => {
-      const element = this._renderer(item);
-      this.addItem(element);
+  renderItems(dataCard) {
+    dataCard.forEach((item) => {
+      this._renderer(item);
     });
   }
 }

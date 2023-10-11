@@ -41,7 +41,7 @@ const popupWithImage = new PopupWithImage(".popup_place_image");
 //слушатель закрытия на крестик, темный фон
 popupWithImage.setEventListeners();
 
-//Открытие Popup card-delete
+//Popup card-delete
 const popupWithCardDelete = new PopupWithDelete(
   config,
   ".popup_place_card-delete"
@@ -69,9 +69,14 @@ validationFormContent.enableValidation();
 validationFormUpdateAvatar.enableValidation();
 
 //Создание карточек с сервера
-const cardSection = new Section((item) => {
-  cardSection.addItem(createCard(item));
-}, ".element");
+const cardSection = new Section(
+  {
+    renderer: (item) => {
+      cardSection.addItem(createCard(item));
+    },
+  },
+  ".element"
+);
 
 //Создание любой карточки
 function createCard(item) {
@@ -228,19 +233,7 @@ api
     api
       .getAllCards() //Получить все карточки
       .then((cards) => {
-        const { id: userId } = userInfoElement.getUserInfo();
-        cards.reverse().forEach((card) => {
-          const isLiked = card.likes.some((user) => user._id === userId);
-          const newcard = createCard({
-            name: card.name,
-            link: card.link,
-            _id: card._id,
-            likes: card.likes,
-            isLiked: isLiked,
-            owner: card.owner, //id создателя карточки
-          });
-          cardSection.addItem(newcard);
-        });
+        cardSection.renderItems(cards.reverse());
       })
       .catch((error) => {
         //если запрос не ушел
